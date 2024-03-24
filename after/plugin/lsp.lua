@@ -31,9 +31,6 @@ require('mason-lspconfig').setup({
 				---
 			})
 		end,
-		eslint = function()
-			require('lspconfig').eslint.setup({})
-		end,
 
 	},
 
