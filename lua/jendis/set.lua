@@ -38,4 +38,6 @@ vim.diagnostic.config({
   severity_sort = true,
 })
 
-
+vim.opt.foldmethod = "indent"
+vim.opt.foldlevel = 99
+vim.opt.foldenable = true
