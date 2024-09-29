@@ -12,12 +12,14 @@ return require('packer').startup(function(use)
 	}
 	use ({ "rose-pine/neovim", as = "rose-pine" })
   use ({"folke/tokyonight.nvim", as = "tokyonight"})
+  use({"mellow-theme/mellow.nvim", as = "mellow"})
   use ({"craftzdog/solarized-osaka.nvim", as = "osaka" })
 	use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
 	use('nvim-treesitter/playground')
 	use('nvim-lua/plenary.nvim')
 	use('ThePrimeagen/harpoon')
 	use 'mbbill/undotree'
+  use 'windwp/nvim-ts-autotag'
 	use 'tpope/vim-fugitive'
     use {
         "williamboman/mason.nvim",
@@ -38,7 +40,20 @@ return require('packer').startup(function(use)
 			{'L3MON4D3/LuaSnip'},
 		}
 	}
-    use('jose-elias-alvarez/null-ls.nvim')
-    use('MunifTanjim/prettier.nvim')
-    use('github/copilot.vim')
+
+  use {
+  'nvim-tree/nvim-tree.lua',
+    requires = {
+    'nvim-tree/nvim-web-devicons', -- optional
+    },
+  }
+
+  use {
+  'nvim-lualine/lualine.nvim',
+    requires = { 'nvim-tree/nvim-web-devicons', opt = true }
+  }
+
+  use('jose-elias-alvarez/null-ls.nvim')
+  use('MunifTanjim/prettier.nvim')
+  use('github/copilot.vim')
 end)
