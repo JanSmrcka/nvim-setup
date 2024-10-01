@@ -16,6 +16,20 @@ vim.keymap.set("n", "<leader>svwm", function()
     require("vim-with-me").StopVimWithMe()
 end)
 
+
+-- select all
+
+vim.keymap.set("n", "<C-a>", "gg<S-v>G")
+
+-- Replace Ctrl-s with :w in normal mode and <Esc>:w in insert mode
+vim.api.nvim_set_keymap('i', '<C-s>', '<Esc>:w<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-s>', ':w<CR>', { noremap = true, silent = true })
+
+
+-- Replace Ctrl-p with Ctrl-j and Ctrl-n with Ctrl-k in command-line mode
+vim.api.nvim_set_keymap('c', '<C-j>', '<C-n>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('c', '<C-k>', '<C-p>', { noremap = true, silent = true })
+
 -- greatest remap ever
 vim.keymap.set("x", "<leader>p", [["_dP]])
 

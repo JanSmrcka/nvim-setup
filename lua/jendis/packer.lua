@@ -14,6 +14,14 @@ return require('packer').startup(function(use)
   use ({"folke/tokyonight.nvim", as = "tokyonight"})
   use({"mellow-theme/mellow.nvim", as = "mellow"})
   use ({"craftzdog/solarized-osaka.nvim", as = "osaka" })
+
+  use 'Mofiqul/vscode.nvim'
+
+  use {
+  "nvim-telescope/telescope-file-browser.nvim",
+  requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
+}
+
 	use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
 	use('nvim-treesitter/playground')
 	use('nvim-lua/plenary.nvim')

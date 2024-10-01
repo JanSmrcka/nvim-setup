@@ -1,24 +1,18 @@
--- disable netrw at the very start of your init.lua
+-- Disable netrw at the very start of your init.lua
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
--- optionally enable 24-bit colour
+-- Optionally enable 24-bit colour
 vim.opt.termguicolors = true
---
--- Open nvim-tree
-vim.api.nvim_set_keymap('n', '<leader>pv', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
--- Open nvim-tree and focus on the current file
-vim.api.nvim_set_keymap('n', '<leader>pt', ':NvimTreeFindFileToggle<CR>', { noremap = true, silent = true })
 
-
-require('nvim-tree').setup {
+require('nvim-tree').setup({
   update_focused_file = {
     enable = true,                -- Enables highlighting of the current file
     update_cwd = true,            -- Updates the current working directory
-    ignore_list = {}              -- Files to ignore
+    ignore_list = {},             -- Files to ignore
   },
   view = {
-    width = 30,                   -- Manually set the width of the nvim-tree window
+    width = 40,                   -- Manually set the width of the nvim-tree window
     side = 'left',                -- Position the tree on the left side
     preserve_window_proportions = true, -- Preserve window proportions when resizing
   },
@@ -34,4 +28,31 @@ require('nvim-tree').setup {
       },
     },
   },
-}
+  -- Key mappings for navigation in nvim-tree
+  on_attach = function(bufnr)
+    local api = require('nvim-tree.api')
+
+    -- Key mappings inside nvim-tree buffer
+    local opts = { noremap = true, silent = true, nowait = true, buffer = bufnr }
+
+    -- Navigation using hjkl
+    vim.keymap.set('n', 'h', api.node.navigate.parent_close, opts)  -- Close folder (collapse)
+    vim.keymap.set('n', 'l', api.node.open.edit, opts)              -- Open folder or file (expand folder)
+
+    -- Other useful mappings (optional)
+    vim.keymap.set('n', 'r', api.fs.rename, opts)  -- Rename file or directory
+    vim.keymap.set('n', 'd', api.fs.remove, opts)  -- Delete file or directory
+    vim.keymap.set('n', 'a', api.fs.create, opts)  -- Create new file or directory
+    vim.keymap.set('n', 'R', api.tree.reload, opts) -- Refresh tree
+  end
+})
+
+-- Make nvim-tree background transparent
+vim.cmd([[
+  hi NvimTreeNormal guibg=NONE ctermbg=NONE
+  hi NvimTreeNormalNC guibg=NONE ctermbg=NONE
+  hi NvimTreeEndOfBuffer guibg=NONE ctermbg=NONE
+]])
+-- Keybindings to toggle nvim-tree and focus on the current file
+vim.api.nvim_set_keymap('n', '<leader>i', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>pt', ':NvimTreeFindFileToggle<CR>', { noremap = true, silent = true })
