@@ -1,3 +1,3 @@
-require("jendis.packer")
-require("jendis.set")
 require("jendis.remap")
+require("jendis.set")
+require("jendis.packer")
