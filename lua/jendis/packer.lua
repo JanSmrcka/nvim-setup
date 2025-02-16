@@ -134,7 +134,9 @@ return require('packer').startup(function(use)
 
   use {
     'lewis6991/gitsigns.nvim', -- Git integration in the sign column
-    config = function() require('gitsigns').setup() end
+    config = function()
+        require('gitsigns').setup()
+    end
   }
 
   use {

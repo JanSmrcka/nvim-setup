@@ -19,7 +19,14 @@ end)
 -- read this: https://github.com/VonHeikemen/lsp-zero.nvim/blob/v3.x/doc/md/guides/integrate-with-mason-nvim.md
 require('mason').setup({})
 require('mason-lspconfig').setup({
-  ensure_installed = { 'tsserver' },
+  ensure_installed = {
+    'ts_ls',
+    'lua_ls',
+    'cssls',
+    'html',
+    'jsonls',
+    'eslint'
+  },
   handlers = {
     lsp_zero.default_setup,
     lua_ls = function()
@@ -27,6 +34,31 @@ require('mason-lspconfig').setup({
       require('lspconfig').lua_ls.setup(lua_opts)
     end,
   }
+})
+
+-- Nastavení pro jednotlivé LSP servery
+require('lspconfig').ts_ls.setup({})
+require('lspconfig').lua_ls.setup({
+  settings = {
+    Lua = {
+      diagnostics = {
+        globals = { 'vim' } -- Uznává 'vim' jako globální proměnnou
+      }
+    }
+  }
+})
+
+require('lspconfig').cssls.setup({})
+require('lspconfig').html.setup({})
+require('lspconfig').jsonls.setup({})
+require('lspconfig').eslint.setup({
+  -- Automatická oprava při uložení
+  on_attach = function(client, bufnr)
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      buffer = bufnr,
+      command = "EslintFixAll",
+    })
+  end,
 })
 
 local cmp = require('cmp')

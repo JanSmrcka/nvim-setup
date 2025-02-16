@@ -1,29 +1,3 @@
-local last_commit_info = ''
-
--- Function to run git log once when entering a buffer
-local function update_last_commit_info()
-  local file = vim.fn.expand('%:p') -- Full file path
-  -- Run git log for the current file, but only if it's inside a git repository
-  local is_git = vim.fn.system('git rev-parse --is-inside-work-tree 2>/dev/null')
-  if is_git == 'true\n' then
-    local commit_info = vim.fn.systemlist('git log -n 1 --pretty=format:"%an, %ad" -- ' .. file)[1]
-    if commit_info and commit_info ~= '' then
-      last_commit_info = ' ' .. commit_info
-    else
-      last_commit_info = '' -- If the file is not tracked by Git, show nothing
-    end
-  else
-    last_commit_info = '' -- Not a git-tracked file
-  end
-end
-
--- Setup autocommand to update last commit info on file/buffer changes
-vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost" }, {
-  callback = function()
-    update_last_commit_info()
-  end
-})
-
 -- Setup lualine
 require('lualine').setup {
   options = {
@@ -64,21 +38,25 @@ require('lualine').setup {
     icons_enabled = true, -- Enable icons for a fancier look
   },
   sections = {
-    lualine_a = { 'mode' },           -- Mode will have different colors based on the current mode
-    lualine_b = { 'branch', 'diff' }, -- Add branch and git diff information
+    lualine_a = { 'mode' }, -- Mode will have different colors based on the current mode
+    lualine_b = {
+      'branch',
+      'diff',
+      {
+        'b:gitsigns_blame_line',
+        cond = function()
+          local ok, blame = pcall(function()
+            return vim.b.gitsigns_blame_line
+          end)
+          return ok and blame ~= nil
+        end,
+      }
+    },
     lualine_c = {
       {
         'filename',
         path = 1, -- Show relative file path
         symbols = { modified = ' ●', readonly = ' ' }, -- Add icons for modified/readonly
-      },
-      {
-        function()
-          return last_commit_info -- Show cached last commit info
-        end,
-        cond = function()
-          return last_commit_info ~= '' -- Only show if there is commit info
-        end,
       },
     },
     lualine_x = { 'encoding', 'fileformat', 'filetype' },
