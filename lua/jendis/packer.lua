@@ -1,69 +1,117 @@
--- This file can be loaded by calling `lua require('plugins')` from your init.vim
+-- ===================================================================
+-- Neovim Plugin Management using packer.nvim
+-- Tento soubor může být načten pomocí `lua require('plugins')` v init.vim
+-- ===================================================================
 
--- Only required if you have packer configured as `opt`
+-- Ujisti se, že packer.nvim je načten
 vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup(function(use)
+  -- Packer sám sebe spravuje
   use 'wbthomason/packer.nvim'
+
+  -- =======================
+  -- 🔎 Telescope (Fuzzy Finder)
+  -- =======================
   use {
     'nvim-telescope/telescope.nvim', tag = '0.1.6',
-    -- or                            , branch = '0.1.x',
     requires = { { 'nvim-lua/plenary.nvim' } }
   }
-  use({ "rose-pine/neovim", as = "rose-pine" })
-  use({ "folke/tokyonight.nvim", as = "tokyonight" })
-  use({ "mellow-theme/mellow.nvim", as = "mellow" })
-  use({ "craftzdog/solarized-osaka.nvim", as = "osaka" })
-
-  use 'Mofiqul/vscode.nvim'
-  use 'kyazdani42/nvim-web-devicons'
-
   use {
     "nvim-telescope/telescope-file-browser.nvim",
     requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
   }
 
+  -- =======================
+  -- 🎨 Barevná schémata
+  -- =======================
+  use({ "rose-pine/neovim", as = "rose-pine" })
+  use({ "folke/tokyonight.nvim", as = "tokyonight" })
+  use({ "mellow-theme/mellow.nvim", as = "mellow" })
+  use({ "craftzdog/solarized-osaka.nvim", as = "osaka" })
+  use 'Mofiqul/vscode.nvim'
 
-  use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
-  use('nvim-treesitter/playground')
-  use('nvim-lua/plenary.nvim')
-  use('ThePrimeagen/harpoon')
-  use 'mbbill/undotree'
-  use 'windwp/nvim-ts-autotag'
-  use 'tpope/vim-fugitive'
+  -- =======================
+  -- 📁 File Explorer (Neo-tree)
+  -- =======================
+  use {
+    'nvim-neo-tree/neo-tree.nvim',
+    requires = {
+      'nvim-lua/plenary.nvim',       -- Utility knihovna
+      'nvim-tree/nvim-web-devicons', -- Ikony souborů
+      'MunifTanjim/nui.nvim',        -- UI komponenty
+      '3rd/image.nvim',              -- Podpora náhledu obrázků
+      {
+        's1n7ax/nvim-window-picker',
+        version = '2.*',
+        config = function()
+          require('window-picker').setup {
+            filter_rules = {
+              include_current_win = false,
+              autoselect_one = true,
+              bo = { filetype = { 'neo-tree', 'neo-tree-popup', 'notify' } },
+              buftype = { 'terminal', 'quickfix' },
+            },
+          }
+        end,
+      },
+    },
+  }
+
+  -- =======================
+  -- 🌳 Treesitter (lepší syntax highlighting)
+  -- =======================
+  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+  use 'nvim-treesitter/playground'
+  use 'windwp/nvim-ts-autotag' -- Automatické zavírání HTML/XML tagů
+
+  -- =======================
+  -- 🔄 Historie a navigace
+  -- =======================
+  use 'ThePrimeagen/harpoon' -- Rychlé přepínání mezi soubory
+  use 'mbbill/undotree'      -- Stromová historie undo/redo
+  use 'tpope/vim-fugitive'   -- Git integrace
+
+  -- =======================
+  -- 🔧 LSP (Language Server Protocol)
+  -- =======================
   use {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
     "neovim/nvim-lspconfig",
   }
+
+  -- 🔥 LSP-Zero: Zjednodušené nastavení LSP + Autocompletion
   use {
     'VonHeikemen/lsp-zero.nvim',
     branch = 'v3.x',
     requires = {
       { 'williamboman/mason.nvim' },
       { 'williamboman/mason-lspconfig.nvim' },
-      -- LSP Support
       { 'neovim/nvim-lspconfig' },
-      -- Autocompletion
+      -- 🔥 Autocompletion
       { 'hrsh7th/nvim-cmp' },
       { 'hrsh7th/cmp-nvim-lsp' },
       { 'L3MON4D3/LuaSnip' },
     }
   }
 
-  use {
-    'nvim-tree/nvim-tree.lua',
-    requires = {
-      'nvim-tree/nvim-web-devicons', -- optional
-    },
-  }
-
+  -- =======================
+  -- 📊 Status Line (Lualine)
+  -- =======================
   use {
     'nvim-lualine/lualine.nvim',
     requires = { 'nvim-tree/nvim-web-devicons', opt = true }
   }
 
-  use('jose-elias-alvarez/null-ls.nvim')
-  use('MunifTanjim/prettier.nvim')
-  use('github/copilot.vim')
+  -- =======================
+  -- 🛠️ Formátování a linting
+  -- =======================
+  use 'jose-elias-alvarez/null-ls.nvim' -- Pro custom LSP-based formátování
+  use 'MunifTanjim/prettier.nvim'       -- Podpora Prettier pro formátování
+
+  -- =======================
+  -- 🤖 AI Assist (GitHub Copilot)
+  -- =======================
+  use 'github/copilot.vim'
 end)
