@@ -49,8 +49,8 @@ local function save_profiles(threshold)
 end
 
 time([[Luarocks path setup]], true)
-local package_path_str = "/Users/jansmrcka/.cache/nvim/packer_hererocks/2.1.1716656478/share/lua/5.1/?.lua;/Users/jansmrcka/.cache/nvim/packer_hererocks/2.1.1716656478/share/lua/5.1/?/init.lua;/Users/jansmrcka/.cache/nvim/packer_hererocks/2.1.1716656478/lib/luarocks/rocks-5.1/?.lua;/Users/jansmrcka/.cache/nvim/packer_hererocks/2.1.1716656478/lib/luarocks/rocks-5.1/?/init.lua"
-local install_cpath_pattern = "/Users/jansmrcka/.cache/nvim/packer_hererocks/2.1.1716656478/lib/lua/5.1/?.so"
+local package_path_str = "/Users/jansmrcka/.cache/nvim/packer_hererocks/2.1.1736781742/share/lua/5.1/?.lua;/Users/jansmrcka/.cache/nvim/packer_hererocks/2.1.1736781742/share/lua/5.1/?/init.lua;/Users/jansmrcka/.cache/nvim/packer_hererocks/2.1.1736781742/lib/luarocks/rocks-5.1/?.lua;/Users/jansmrcka/.cache/nvim/packer_hererocks/2.1.1736781742/lib/luarocks/rocks-5.1/?/init.lua"
+local install_cpath_pattern = "/Users/jansmrcka/.cache/nvim/packer_hererocks/2.1.1736781742/lib/lua/5.1/?.so"
 if not string.find(package.path, package_path_str, 1, true) then
   package.path = package.path .. ';' .. package_path_str
 end
@@ -74,6 +74,12 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
+  ["Comment.nvim"] = {
+    config = { "\27LJ\2\næ\3\0\0\b\0\15\0A5\0\0\0006\1\1\0009\1\2\0019\1\3\1'\3\4\0'\4\5\0006\5\6\0'\a\a\0B\5\2\0029\5\b\0059\5\t\0059\5\n\5\18\6\0\0B\1\5\0016\1\1\0009\1\2\0019\1\3\1'\3\4\0'\4\v\0006\5\6\0'\a\a\0B\5\2\0029\5\b\0059\5\t\0059\5\n\5\18\6\0\0B\1\5\0016\1\1\0009\1\2\0019\1\3\1'\3\4\0'\4\f\0006\5\6\0'\a\a\0B\5\2\0029\5\b\0059\5\t\0059\5\n\5\18\6\0\0B\1\5\0016\1\1\0009\1\2\0019\1\3\1'\3\r\0'\4\5\0'\5\14\0\18\6\0\0B\1\5\0016\1\1\0009\1\2\0019\1\3\1'\3\r\0'\4\v\0'\5\14\0\18\6\0\0B\1\5\0016\1\1\0009\1\2\0019\1\3\1'\3\r\0'\4\f\0'\5\14\0\18\6\0\0B\1\5\1K\0\1\0R<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>\6v\n<C-/>\n<C-c>\fcurrent\rlinewise\vtoggle\16Comment.api\frequire\n<C-_>\6n\bset\vkeymap\bvim\1\0\2\fnoremap\2\vsilent\2\0" },
+    loaded = true,
+    path = "/Users/jansmrcka/.local/share/nvim/site/pack/packer/start/Comment.nvim",
+    url = "https://github.com/numToStr/Comment.nvim"
+  },
   LuaSnip = {
     loaded = true,
     path = "/Users/jansmrcka/.local/share/nvim/site/pack/packer/start/LuaSnip",
@@ -93,6 +99,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/jansmrcka/.local/share/nvim/site/pack/packer/start/harpoon",
     url = "https://github.com/ThePrimeagen/harpoon"
+  },
+  ["image.nvim"] = {
+    loaded = true,
+    path = "/Users/jansmrcka/.local/share/nvim/site/pack/packer/start/image.nvim",
+    url = "https://github.com/3rd/image.nvim"
   },
   ["lsp-zero.nvim"] = {
     loaded = true,
@@ -119,6 +130,16 @@ _G.packer_plugins = {
     path = "/Users/jansmrcka/.local/share/nvim/site/pack/packer/start/mellow",
     url = "https://github.com/mellow-theme/mellow.nvim"
   },
+  ["neo-tree.nvim"] = {
+    loaded = true,
+    path = "/Users/jansmrcka/.local/share/nvim/site/pack/packer/start/neo-tree.nvim",
+    url = "https://github.com/nvim-neo-tree/neo-tree.nvim"
+  },
+  ["nui.nvim"] = {
+    loaded = true,
+    path = "/Users/jansmrcka/.local/share/nvim/site/pack/packer/start/nui.nvim",
+    url = "https://github.com/MunifTanjim/nui.nvim"
+  },
   ["null-ls.nvim"] = {
     loaded = true,
     path = "/Users/jansmrcka/.local/share/nvim/site/pack/packer/start/null-ls.nvim",
@@ -134,11 +155,6 @@ _G.packer_plugins = {
     path = "/Users/jansmrcka/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
   },
-  ["nvim-tree.lua"] = {
-    loaded = true,
-    path = "/Users/jansmrcka/.local/share/nvim/site/pack/packer/start/nvim-tree.lua",
-    url = "https://github.com/nvim-tree/nvim-tree.lua"
-  },
   ["nvim-treesitter"] = {
     loaded = true,
     path = "/Users/jansmrcka/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
@@ -152,7 +168,13 @@ _G.packer_plugins = {
   ["nvim-web-devicons"] = {
     loaded = true,
     path = "/Users/jansmrcka/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
-    url = "https://github.com/kyazdani42/nvim-web-devicons"
+    url = "https://github.com/nvim-tree/nvim-web-devicons"
+  },
+  ["nvim-window-picker"] = {
+    config = { "\27LJ\2\nå\2\0\0\6\0\f\0\0156\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\n\0005\3\3\0005\4\5\0005\5\4\0=\5\6\4=\4\a\0035\4\b\0=\4\t\3=\3\v\2B\0\2\1K\0\1\0\17filter_rules\1\0\1\17filter_rules\0\fbuftype\1\3\0\0\rterminal\rquickfix\abo\rfiletype\1\0\1\rfiletype\0\1\4\0\0\rneo-tree\19neo-tree-popup\vnotify\1\0\4\19autoselect_one\2\24include_current_win\1\fbuftype\0\abo\0\nsetup\18window-picker\frequire\0" },
+    loaded = true,
+    path = "/Users/jansmrcka/.local/share/nvim/site/pack/packer/start/nvim-window-picker",
+    url = "https://github.com/s1n7ax/nvim-window-picker"
   },
   osaka = {
     loaded = true,
@@ -217,6 +239,14 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
+-- Config for: nvim-window-picker
+time([[Config for nvim-window-picker]], true)
+try_loadstring("\27LJ\2\nå\2\0\0\6\0\f\0\0156\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\n\0005\3\3\0005\4\5\0005\5\4\0=\5\6\4=\4\a\0035\4\b\0=\4\t\3=\3\v\2B\0\2\1K\0\1\0\17filter_rules\1\0\1\17filter_rules\0\fbuftype\1\3\0\0\rterminal\rquickfix\abo\rfiletype\1\0\1\rfiletype\0\1\4\0\0\rneo-tree\19neo-tree-popup\vnotify\1\0\4\19autoselect_one\2\24include_current_win\1\fbuftype\0\abo\0\nsetup\18window-picker\frequire\0", "config", "nvim-window-picker")
+time([[Config for nvim-window-picker]], false)
+-- Config for: Comment.nvim
+time([[Config for Comment.nvim]], true)
+try_loadstring("\27LJ\2\næ\3\0\0\b\0\15\0A5\0\0\0006\1\1\0009\1\2\0019\1\3\1'\3\4\0'\4\5\0006\5\6\0'\a\a\0B\5\2\0029\5\b\0059\5\t\0059\5\n\5\18\6\0\0B\1\5\0016\1\1\0009\1\2\0019\1\3\1'\3\4\0'\4\v\0006\5\6\0'\a\a\0B\5\2\0029\5\b\0059\5\t\0059\5\n\5\18\6\0\0B\1\5\0016\1\1\0009\1\2\0019\1\3\1'\3\4\0'\4\f\0006\5\6\0'\a\a\0B\5\2\0029\5\b\0059\5\t\0059\5\n\5\18\6\0\0B\1\5\0016\1\1\0009\1\2\0019\1\3\1'\3\r\0'\4\5\0'\5\14\0\18\6\0\0B\1\5\0016\1\1\0009\1\2\0019\1\3\1'\3\r\0'\4\v\0'\5\14\0\18\6\0\0B\1\5\0016\1\1\0009\1\2\0019\1\3\1'\3\r\0'\4\f\0'\5\14\0\18\6\0\0B\1\5\1K\0\1\0R<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>\6v\n<C-/>\n<C-c>\fcurrent\rlinewise\vtoggle\16Comment.api\frequire\n<C-_>\6n\bset\vkeymap\bvim\1\0\2\fnoremap\2\vsilent\2\0", "config", "Comment.nvim")
+time([[Config for Comment.nvim]], false)
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then

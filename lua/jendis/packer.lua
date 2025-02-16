@@ -58,6 +58,8 @@ return require('packer').startup(function(use)
     },
   }
 
+  use { 'numToStr/Comment.nvim' }
+
   -- =======================
   -- 🌳 Treesitter (lepší syntax highlighting)
   -- =======================
