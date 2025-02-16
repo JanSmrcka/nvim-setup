@@ -12,6 +12,12 @@ function ColorMyPencil(color)
 
   vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
   vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+
+  -- Add diagnostic highlights
+  vim.api.nvim_set_hl(0, "DiagnosticError", { fg = "#db4b4b" })
+  vim.api.nvim_set_hl(0, "DiagnosticWarn", { fg = "#e0af68" })
+  vim.api.nvim_set_hl(0, "DiagnosticInfo", { fg = "#0db9d7" })
+  vim.api.nvim_set_hl(0, "DiagnosticHint", { fg = "#10B981" })
 end
 
 ColorMyPencil()

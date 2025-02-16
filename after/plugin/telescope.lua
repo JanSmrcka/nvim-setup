@@ -1,16 +1,28 @@
 -- Load the telescope module and configure it
 local telescope = require('telescope')
 
+local transform_mod = require('telescope.actions.mt').transform_mod
+local actions = transform_mod({
+    send_to_qflist = function(prompt_bufnr)
+        require('telescope.actions').send_to_qflist(prompt_bufnr)
+        require('telescope.actions').open_qflist(prompt_bufnr)
+    end,
+})
+
 telescope.setup({
   defaults = {
     mappings = {
       i = {
         ['<C-j>'] = require('telescope.actions').move_selection_next,     -- Move to the next item
         ['<C-k>'] = require('telescope.actions').move_selection_previous, -- Move to the previous item
+        ['<C-l>'] = require('telescope.actions').select_default,
+        ['<C-q>'] = actions.send_to_qflist,
       },
       n = {
         ['<C-j>'] = require('telescope.actions').move_selection_next,
         ['<C-k>'] = require('telescope.actions').move_selection_previous,
+        ['<C-l>'] = require('telescope.actions').select_default,
+        ['<C-q>'] = actions.send_to_qflist,
       },
     },
   },
@@ -57,9 +69,13 @@ local builtin = require('telescope.builtin')
 
 vim.keymap.set('n', '<leader>pf', builtin.find_files, {})
 vim.keymap.set('n', '<C-p>', builtin.git_files, {})
-vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
+vim.keymap.set('n', '<C-g>', builtin.live_grep, {})
 --vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 vim.keymap.set('n', '<leader>ps', function()
   builtin.grep_string({ search = vim.fn.input("Grep > ") })
 end)
+
+vim.keymap.set('n', '<leader>/', builtin.current_buffer_fuzzy_find, {})
+vim.keymap.set('n', '<leader>?', builtin.oldfiles, {})
+vim.keymap.set('n', '<leader>sd', builtin.diagnostics, {})

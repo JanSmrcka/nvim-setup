@@ -116,4 +116,32 @@ return require('packer').startup(function(use)
   -- 🤖 AI Assist (GitHub Copilot)
   -- =======================
   use 'github/copilot.vim'
+
+  use {
+    'windwp/nvim-autopairs', -- Auto close brackets, quotes, etc.
+    config = function() require('nvim-autopairs').setup() end
+  }
+
+  use {
+    'folke/which-key.nvim', -- Help you remember keybindings
+    config = function() require('which-key').setup() end
+  }
+
+  use {
+    'folke/trouble.nvim', -- Better diagnostics window
+    requires = 'nvim-tree/nvim-web-devicons'
+  }
+
+  use {
+    'lewis6991/gitsigns.nvim', -- Git integration in the sign column
+    config = function() require('gitsigns').setup() end
+  }
+
+  use {
+    "folke/todo-comments.nvim",
+    requires = "nvim-lua/plenary.nvim",
+    config = function()
+        require("todo-comments").setup()
+    end
+  }
 end)
