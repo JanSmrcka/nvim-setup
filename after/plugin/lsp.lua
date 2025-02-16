@@ -25,7 +25,8 @@ require('mason-lspconfig').setup({
     'cssls',
     'html',
     'jsonls',
-    'eslint'
+    'eslint',
+    'gopls'  -- Go language server
   },
   handlers = {
     lsp_zero.default_setup,
@@ -59,6 +60,20 @@ require('lspconfig').eslint.setup({
       command = "EslintFixAll",
     })
   end,
+})
+
+-- Konfigurace pro Go
+require('lspconfig').gopls.setup({
+    settings = {
+        gopls = {
+            analyses = {
+                unusedparams = true,
+            },
+            staticcheck = true,
+            usePlaceholders = true,
+            completeUnimported = true,
+        },
+    },
 })
 
 local cmp = require('cmp')
