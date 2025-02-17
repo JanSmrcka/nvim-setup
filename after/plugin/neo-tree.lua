@@ -1,5 +1,5 @@
 require('neo-tree').setup {
-  close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
+  close_if_last_window = true, -- Close Neo-tree if it is the last window left in the tab
   popup_border_style = 'rounded',
   enable_git_status = true,
   enable_diagnostics = true,
@@ -97,12 +97,12 @@ require('neo-tree').setup {
       noremap = true,
       nowait = true,
     },
-     -- Vypnout lualine a použít defaultní footer
-     use_popups_for_input = false,
-     popup = {
-         size = { height = "95%", width = "95%" },
-         position = "50%",
-     },
+    -- Vypnout lualine a použít defaultní footer
+    use_popups_for_input = false,
+    popup = {
+      size = { height = "95%", width = "95%" },
+      position = "50%",
+    },
     mappings = {
       ['<space>'] = {
         'toggle_node',
@@ -162,7 +162,7 @@ require('neo-tree').setup {
   nesting_rules = {},
   filesystem = {
     filtered_items = {
-      visible = false, -- when true, they will just be displayed differently than normal items
+      visible = false,
       hide_dotfiles = false,
       hide_gitignored = false,
       hide_hidden = false, -- only works on Windows for hidden files/directories
@@ -192,12 +192,10 @@ require('neo-tree').setup {
       },
     },
     follow_current_file = {
-      enabled = false,                      -- This will find and focus the file in the active buffer every time
-      --               -- the current file is changed while the tree is open.
-      leave_dirs_open = false,              -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
+      enabled = true,
     },
     group_empty_dirs = false,               -- when true, empty folders will be grouped together
-    hijack_netrw_behavior = 'open_default', -- netrw disabled, opening a directory opens neo-tree
+    hijack_netrw_behavior = "disabled",  -- Změněno z "open_current" nebo podobné hodnoty
     -- in whatever position is specified in window.position
     -- "open_current",  -- netrw disabled, opening a directory opens within the
     -- window like netrw would, regardless of window.position

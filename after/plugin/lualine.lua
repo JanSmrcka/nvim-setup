@@ -3,38 +3,39 @@ require('lualine').setup {
   options = {
     theme = {
       normal = {
-        a = { fg = '#ffffff', bg = '#005f87', gui = 'bold' }, -- Normal mode color
-        b = { fg = '#ffffff', bg = '#2c2c2c' },
-        c = { fg = '#c0c0c0', bg = '#1c1c1c' },
+        a = { fg = '#1E1E2E', bg = '#89B4FA', gui = 'bold' }, -- Tmavý text na modré
+        b = { fg = '#CDD6F4', bg = '#313244' },
+        c = { fg = '#CDD6F4', bg = '#1E1E2E' },
       },
       insert = {
-        a = { fg = '#ffffff', bg = '#00af00', gui = 'bold' }, -- Insert mode color
-        b = { fg = '#ffffff', bg = '#2c2c2c' },
-        c = { fg = '#c0c0c0', bg = '#1c1c1c' },
+        a = { fg = '#1E1E2E', bg = '#A6E3A1', gui = 'bold' }, -- Tmavý text na zelené
+        b = { fg = '#CDD6F4', bg = '#313244' },
+        c = { fg = '#CDD6F4', bg = '#1E1E2E' },
       },
       visual = {
-        a = { fg = '#ffffff', bg = '#d7af00', gui = 'bold' }, -- Visual mode color
-        b = { fg = '#ffffff', bg = '#2c2c2c' },
-        c = { fg = '#c0c0c0', bg = '#1c1c1c' },
+        a = { fg = '#1E1E2E', bg = '#F5C2E7', gui = 'bold' }, -- Tmavý text na růžové
+        b = { fg = '#CDD6F4', bg = '#313244' },
+        c = { fg = '#CDD6F4', bg = '#1E1E2E' },
       },
       replace = {
-        a = { fg = '#ffffff', bg = '#d7005f', gui = 'bold' }, -- Replace mode color
-        b = { fg = '#ffffff', bg = '#2c2c2c' },
-        c = { fg = '#c0c0c0', bg = '#1c1c1c' },
+        a = { fg = '#1E1E2E', bg = '#F38BA8', gui = 'bold' }, -- Tmavý text na červené
+        b = { fg = '#CDD6F4', bg = '#313244' },
+        c = { fg = '#CDD6F4', bg = '#1E1E2E' },
       },
       command = {
-        a = { fg = '#ffffff', bg = '#5f00af', gui = 'bold' }, -- Command-line mode color
-        b = { fg = '#ffffff', bg = '#2c2c2c' },
-        c = { fg = '#c0c0c0', bg = '#1c1c1c' },
+        a = { fg = '#1E1E2E', bg = '#FAB387', gui = 'bold' }, -- Tmavý text na oranžové
+        b = { fg = '#CDD6F4', bg = '#313244' },
+        c = { fg = '#CDD6F4', bg = '#1E1E2E' },
       },
       inactive = {
-        a = { fg = '#c0c0c0', bg = '#1c1c1c', gui = 'bold' },
-        b = { fg = '#c0c0c0', bg = '#2c2c2c' },
-        c = { fg = '#c0c0c0', bg = '#1c1c1c' },
+        a = { fg = '#CDD6F4', bg = '#1E1E2E', gui = 'bold' },
+        b = { fg = '#CDD6F4', bg = '#1E1E2E' },
+        c = { fg = '#CDD6F4', bg = '#1E1E2E' },
       },
     },
     section_separators = { left = '', right = '' }, -- Fancy section separators
     component_separators = { left = '', right = '' }, -- Fancy component separators
+    disabled_filetypes = { 'neo-tree', 'NvimTree', 'Outline' }, -- Zjednodušená verze
     icons_enabled = true, -- Enable icons for a fancier look
   },
   sections = {

@@ -3,10 +3,10 @@ local telescope = require('telescope')
 
 local transform_mod = require('telescope.actions.mt').transform_mod
 local actions = transform_mod({
-    send_to_qflist = function(prompt_bufnr)
-        require('telescope.actions').send_to_qflist(prompt_bufnr)
-        require('telescope.actions').open_qflist(prompt_bufnr)
-    end,
+  send_to_qflist = function(prompt_bufnr)
+    require('telescope.actions').send_to_qflist(prompt_bufnr)
+    require('telescope.actions').open_qflist(prompt_bufnr)
+  end,
 })
 
 telescope.setup({
@@ -29,7 +29,9 @@ telescope.setup({
   extensions = {
     file_browser = {
       theme = "dropdown",  -- Makes it look like a modal window
-      hijack_netrw = true, -- Replaces netrw with file-browser
+      hijack_netrw = false,  -- Změníme na false, aby se nespouštěl automaticky
+      hidden = true,
+      respect_gitignore = false,
       -- Other configurations if necessary
     },
   },
@@ -79,3 +81,8 @@ end)
 vim.keymap.set('n', '<leader>/', builtin.current_buffer_fuzzy_find, {})
 vim.keymap.set('n', '<leader>?', builtin.oldfiles, {})
 vim.keymap.set('n', '<leader>sd', builtin.diagnostics, {})
+
+--vim.keymap.set("n", "<space>fb", ":Telescope file_browser<CR>")
+
+-- open file_browser with the path of the current buffer
+vim.keymap.set("n", "<C-b>", ":Telescope file_browser path=%:p:h select_buffer=true<CR>")
