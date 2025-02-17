@@ -5,6 +5,11 @@ local event = "BufWritePre" -- or "BufWritePost"
 local async = event == "BufWritePost"
 
 null_ls.setup({
+  sources = {
+    -- Go specific formatters
+    null_ls.builtins.formatting.gofmt,        -- Basic Go formatter
+    null_ls.builtins.formatting.goimports,    -- Adds/removes imports automatically
+  },
   on_attach = function(client, bufnr)
     if client.supports_method("textDocument/formatting") then
       vim.keymap.set("n", "<Leader>f", function()

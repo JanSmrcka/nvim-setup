@@ -28,18 +28,15 @@ vim.api.nvim_create_autocmd("VimEnter", {
     -- Get current buffer info
     local current_buf = vim.api.nvim_get_current_buf()
     local buf_name = vim.api.nvim_buf_get_name(current_buf)
-    print("Buffer name: " .. buf_name)
 
     -- Check if the buffer name is a directory
     local is_directory = vim.fn.isdirectory(buf_name) == 1
-    print("Is directory: " .. tostring(is_directory))
 
     -- Show Alpha if:
     -- 1. No arguments (empty startup)
     -- 2. Current buffer is a directory
     if vim.fn.argc() == 0 or is_directory then
       vim.schedule(function()
-        print("Showing Alpha")
         show_alpha()
       end)
     end

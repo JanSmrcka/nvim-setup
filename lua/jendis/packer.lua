@@ -135,7 +135,7 @@ return require('packer').startup(function(use)
   use {
     'lewis6991/gitsigns.nvim', -- Git integration in the sign column
     config = function()
-        require('gitsigns').setup()
+      require('gitsigns').setup()
     end
   }
 
@@ -143,7 +143,7 @@ return require('packer').startup(function(use)
     "folke/todo-comments.nvim",
     requires = "nvim-lua/plenary.nvim",
     config = function()
-        require("todo-comments").setup()
+      require("todo-comments").setup()
     end
   }
 
@@ -151,7 +151,7 @@ return require('packer').startup(function(use)
     'goolord/alpha-nvim',
     requires = { 'nvim-tree/nvim-web-devicons' },
     config = function()
-        require('alpha').setup(require('alpha.themes.dashboard').config)
+      require('alpha').setup(require('alpha.themes.dashboard').config)
     end
   }
 end)
