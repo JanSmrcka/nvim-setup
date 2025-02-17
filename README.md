@@ -1,98 +1,127 @@
-# Neovim Keymap Cheat Sheet
+# 🚀 Neovim Configuration
 
-## Obecné klávesové zkratky (neremapované)
+Personal Neovim configuration focused on modern development with beautiful UI and efficient workflows.
 
-| Klávesová zkratka    | Akce                                            |
-| -------------------- | ----------------------------------------------- |
-| `:w`                 | Uložit soubor                                   |
-| `:q`                 | Zavřít soubor                                   |
-| `:wq`                | Uložit a zavřít soubor                          |
-| `:q!`                | Zavřít soubor bez uložení                       |
-| `:e [název_souboru]` | Otevřít soubor                                  |
-| `:vs`                | Vertikální rozdělení obrazovky (split window)   |
-| `:sp`                | Horizontální rozdělení obrazovky (split window) |
-| `Ctrl+w, h/j/k/l`    | Přepínání mezi okny (vlevo/dolů/nahoru/vpravo)  |
-| `u`                  | Zpět (undo)                                     |
-| `Ctrl+r`             | Opakovat akci (redo)                            |
-| `x`                  | Odstranit znak                                  |
-| `dd`                 | Odstranit celý řádek                            |
-| `yy`                 | Zkopírovat celý řádek                           |
-| `p`                  | Vložit po kurzoru                               |
-| `o`                  | Vytvořit nový řádek pod aktuálním               |
-| `O`                  | Vytvořit nový řádek nad aktuálním               |
-| `gg`                 | Jít na začátek souboru                          |
-| `G`                  | Jít na konec souboru                            |
-| `0`                  | Jít na začátek řádku                            |
-| `$`                  | Jít na konec řádku                              |
-| `Ctrl+o`             | Jít zpět na předchozí pozici kurzoru            |
-| `Ctrl+i`             | Jít vpřed na další pozici kurzoru               |
-| `:noh`               | Zrušit zvýraznění hledaného textu               |
-| `/[text]`            | Hledat text                                     |
-| `n`                  | Jít na další výskyt hledaného textu             |
-| `N`                  | Jít na předchozí výskyt hledaného textu         |
-| `%`                  | Skok na odpovídající závorku ((), {}, [])       |
+## ⌨️ Key Mappings
 
-## Obecné klávesové zkratky z tvé keymapy
+### 🎯 General
 
-| Klávesová zkratka | Akce                                  |
-| ----------------- | ------------------------------------- |
-| `<leader>u`       | Otevře/zavře Undotree                 |
-| `<leader>pf`      | Vyhledávání souborů pomocí Telescope  |
-| `<C-p>`           | Vyhledávání Git souborů               |
-| `<leader>fg`      | Live grep (hledání v souborech)       |
-| `<leader>fb`      | Zobrazení bufferů                     |
-| `<leader>fh`      | Zobrazení nápovědy (help tags)        |
-| `<leader>ps`      | Grep s vlastním vyhledávacím řetězcem |
-| `<leader>a`       | Přidá soubor do Harpoon               |
-| `<C-e>`           | Otevře/zavře rychlé menu Harpoon      |
-| `<C-h>`           | Naviguje na první soubor v Harpoon    |
-| `<C-j>`           | Naviguje na druhý soubor v Harpoon    |
-| `<C-k>`           | Naviguje na třetí soubor v Harpoon    |
-| `<C-l>`           | Naviguje na čtvrtý soubor v Harpoon   |
-| `<leader>gs`      | Otevře Git v Neovimu                  |
+| Keybind            | Description         |
+| ------------------ | ------------------- |
+| `<Space>`          | Leader key          |
+| `<C-s>`            | Save file           |
+| `<C-a>`            | Select all          |
+| `<leader>q`        | Quit                |
+| `<leader><leader>` | Source current file |
 
-## LSP (Language Server Protocol) klávesové zkratky
+### 📑 Buffer Navigation
 
-| Klávesová zkratka  | Akce                                      |
-| ------------------ | ----------------------------------------- |
-| `<leader>f`        | Formátování kódu                          |
-| `gd`               | Jít na definici                           |
-| `K`                | Zobrazení dokumentace                     |
-| `<leader>vws`      | Vyhledání symbolů v projektu              |
-| `<leader>vd`       | Zobrazení diagnostiky (chyby)             |
-| `[d`               | Jít na další chybu                        |
-| `]d`               | Jít na předchozí chybu                    |
-| `<leader>vca`      | Zobrazení možných akcí (code actions)     |
-| `<leader>vrr`      | Zobrazení odkazů na symbol r              |
-| `<leader>vrn`      | Přejmenování symbolu                      |
-| `<C-h>` (v insert) | Zobrazení nápovědy pro podpis (signature) |
+| Keybind | Description          |
+| ------- | -------------------- |
+| `<C-h>` | Move to left window  |
+| `<C-j>` | Move to window below |
+| `<C-k>` | Move to window above |
+| `<C-l>` | Move to right window |
 
-## Teleskop (Telescope) klávesové zkratky
+### 📝 Text Manipulation
 
-| Klávesová zkratka | Akce                                  |
-| ----------------- | ------------------------------------- |
-| `<leader>pf`      | Vyhledávání souborů pomocí Telescope  |
-| `<leader>fg`      | Live grep (hledání v souborech)       |
-| `<leader>fb`      | Zobrazení bufferů                     |
-| `<leader>fh`      | Zobrazení nápovědy (help tags)        |
-| `<leader>ps`      | Grep s vlastním vyhledávacím řetězcem |
+| Keybind      | Description                          |
+| ------------ | ------------------------------------ |
+| `J` (visual) | Move selected lines down             |
+| `K` (visual) | Move selected lines up               |
+| `<leader>p`  | Paste without yanking                |
+| `<leader>y`  | Yank to system clipboard             |
+| `<leader>Y`  | Yank line to system clipboard        |
+| `<leader>d`  | Delete without yanking               |
+| `<leader>s`  | Search and replace word under cursor |
+| `<leader>x`  | Make current file executable         |
 
-## Harpoon klávesové zkratky
+### 🔍 Telescope
 
-| Klávesová zkratka | Akce                                |
-| ----------------- | ----------------------------------- |
-| `<leader>a`       | Přidá aktuální soubor do Harpoon    |
-| `<C-e>`           | Otevře/zavře rychlé menu Harpoon    |
-| `<C-h>`           | Naviguje na první soubor v Harpoon  |
-| `<C-j>`           | Naviguje na druhý soubor v Harpoon  |
-| `<C-k>`           | Naviguje na třetí soubor v Harpoon  |
-| `<C-l>`           | Naviguje na čtvrtý soubor v Harpoon |
+| Keybind      | Description                                |
+| ------------ | ------------------------------------------ |
+| `<leader>pf` | Find files                                 |
+| `<C-p>`      | Git files                                  |
+| `<C-g>`      | Live grep                                  |
+| `<leader>fh` | Help tags                                  |
+| `<leader>/`  | Fuzzy find in current buffer               |
+| `<leader>?`  | Show recent files                          |
+| `<leader>sd` | Show diagnostics                           |
+| `<C-b>`      | File browser in current buffer's directory |
 
-## CMP (Completion)
+### 📌 Harpoon
 
-| Klávesová zkratka | Akce                          |
-| ----------------- | ----------------------------- |
-| `<C-p>`           | Vybere předchozí položku      |
-| `<C-n>`           | Vybere další položku          |
-| `<CR>`            | Potvrdí výběr                 |
-| `<C-e>`           | Zobrazí možnosti pro doplnění |
+| Keybind       | Description              |
+| ------------- | ------------------------ |
+| `<leader>a`   | Add file to harpoon      |
+| `<C-e>`       | Toggle quick menu        |
+| `<leader>1-4` | Jump to harpoon file 1-4 |
+
+### 🔧 LSP
+
+| Keybind       | Description            |
+| ------------- | ---------------------- |
+| `gd`          | Go to definition       |
+| `K`           | Show hover information |
+| `<leader>vws` | Workspace symbol       |
+| `<leader>vd`  | Show diagnostics float |
+| `[d`          | Next diagnostic        |
+| `]d`          | Previous diagnostic    |
+| `<leader>vca` | Code action            |
+| `<leader>vrr` | Show references        |
+| `<leader>vrn` | Rename                 |
+| `<C-h>`       | Signature help         |
+| `<leader>f`   | Format code            |
+
+### 💭 Comments
+
+| Keybind | Description                       |
+| ------- | --------------------------------- |
+| `<C-_>` | Toggle line comment               |
+| `<C-c>` | Toggle line comment (alternative) |
+| `<C-/>` | Toggle line comment (alternative) |
+
+### 📝 Todo Comments
+
+| Keybind      | Description           |
+| ------------ | --------------------- |
+| `]t`         | Next todo comment     |
+| `[t`         | Previous todo comment |
+| `<leader>ft` | Find todos            |
+
+### 🌳 Git
+
+| Keybind      | Description |
+| ------------ | ----------- |
+| `<leader>gs` | Git status  |
+
+### 🔄 Undo
+
+| Keybind     | Description     |
+| ----------- | --------------- |
+| `<leader>u` | Toggle undotree |
+
+## 🎨 Features
+
+- 🎯 Modern UI with Alpha dashboard
+- 🌈 Transparent background support
+- 🔍 Fuzzy finding with Telescope
+- 📝 LSP support with auto-completion
+- 🌳 File explorer with Neo-tree
+- 💭 Smart commenting
+- 🔄 Undo history visualization
+- ✨ Auto-formatting
+- 📌 Quick file navigation with Harpoon
+- 🎨 Syntax highlighting with Treesitter
+- 🏷️ Auto tag closing for HTML/JSX
+- 📝 Todo comments highlighting
+- 🔧 Null-ls for additional formatting
+- 💅 Prettier integration
+
+## 📦 Required Dependencies
+
+- Neovim >= 0.9.0
+- Git
+- A Nerd Font
+- ripgrep (for Telescope)
+- Node.js (for LSP)
