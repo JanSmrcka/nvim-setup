@@ -29,6 +29,7 @@ return require('packer').startup(function(use)
   use({ "folke/tokyonight.nvim", as = "tokyonight" })
   use({ "mellow-theme/mellow.nvim", as = "mellow" })
   use({ "craftzdog/solarized-osaka.nvim", as = "osaka" })
+  use "olimorris/onedarkpro.nvim"
   use 'Mofiqul/vscode.nvim'
 
   -- =======================
@@ -113,10 +114,26 @@ return require('packer').startup(function(use)
   use 'MunifTanjim/prettier.nvim'       -- Podpora Prettier pro formátování
 
   -- =======================
-  -- 🤖 AI Assist (GitHub Copilot)
+  -- 🤖 AI Assist
   -- =======================
   use 'github/copilot.vim'
-
+  -- Required dependencies for avante.nvim
+  --  use 'stevearc/dressing.nvim'
+  -- use 'nvim-lua/plenary.nvim'
+  --use 'MunifTanjim/nui.nvim'
+  --use 'MeanderingProgrammer/render-markdown.nvim'
+  -- Optional dependencies for avante.nvim
+  --use 'HakonHarnes/img-clip.nvim'
+  --use 'zbirenbaum/copilot.lua'
+  -- Avante.nvim with build process
+  -- use {
+  -- 'yetone/avante.nvim',
+  -- branch = 'main',
+  -- run = 'make',
+  --config = function()
+  -- Configuration will be in after/plugin/avante.lua
+  -- end
+  --}
   use {
     'windwp/nvim-autopairs', -- Auto close brackets, quotes, etc.
     config = function() require('nvim-autopairs').setup() end

@@ -33,9 +33,29 @@ require('lualine').setup {
         c = { fg = '#CDD6F4', bg = '#1E1E2E' },
       },
     },
-    section_separators = { left = '', right = '' }, -- Fancy section separators
-    component_separators = { left = '', right = '' }, -- Fancy component separators
-    disabled_filetypes = { 'neo-tree', 'NvimTree', 'Outline' }, -- Zjednodušená verze
+    section_separators = { left = '', right = '' },   -- Fancy section separators
+    component_separators = { left = '', right = '' }, -- Fancy component separators
+    disabled_filetypes = {
+      'neo-tree',
+      'NvimTree',
+      'Outline',
+      -- Zakázat lualine pro Avante buffery
+      'avante',
+      'AvanteChat',
+      "AvanteChatInput",
+      "AvanteChatList",
+      'AvanteBuffer',
+      'AvanteInput',
+      'AvanteResult',
+      'avante-nvim',
+      'AvanteToolWindow',
+      -- Obecné buffery, které mohou být používány Avante
+      'DressingInput',
+      'DressingSelect',
+      'NoStatusLine',
+    }, -- Zjednodušená verze
+    -- Další způsob, jak zakázat lualine pro Avante buffery
+    disabled_buftypes = { 'prompt' },
     icons_enabled = true, -- Enable icons for a fancier look
   },
   sections = {

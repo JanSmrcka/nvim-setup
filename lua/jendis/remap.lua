@@ -10,8 +10,8 @@ vim.keymap.set('n', '<C-h>', ':wincmd h<CR>', opts)
 vim.keymap.set('n', '<C-l>', ':wincmd l<CR>', opts)
 
 -- Move lines up and down
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 
 --
 vim.keymap.set("n", "J", "mzJ`z")
@@ -28,6 +28,7 @@ vim.keymap.set("n", "<C-a>", "gg<S-v>G")
 -- Replace Ctrl-s with :w in normal mode and <Esc>:w in insert mode
 vim.api.nvim_set_keymap('i', '<C-s>', '<Esc>:w<CR>', opts)
 vim.api.nvim_set_keymap('n', '<C-s>', ':w<CR>', opts)
+vim.api.nvim_set_keymap('v', '<C-s>', '<ESC>:w<CR>', opts)
 
 
 -- Replace Ctrl-p with Ctrl-j and Ctrl-n with Ctrl-k in command-line mode
@@ -47,7 +48,7 @@ vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 vim.keymap.set("i", "<C-c>", "<Esc>")
 
 vim.keymap.set("n", "Q", "<nop>")
-vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-fuzzy<CR>")
+vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-fuzzy.sh<CR>")
 vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
 
 vim.keymap.set("n", "<M-j>", "<cmd>cnext<CR>zz")
