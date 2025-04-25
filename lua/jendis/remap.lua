@@ -9,6 +9,12 @@ vim.keymap.set('n', '<C-j>', ':wincmd j<CR>', opts)
 vim.keymap.set('n', '<C-h>', ':wincmd h<CR>', opts)
 vim.keymap.set('n', '<C-l>', ':wincmd l<CR>', opts)
 
+-- copy relative path to clipboard
+vim.keymap.set('n', '<leader>cr', function()
+  vim.fn.setreg('+', vim.fn.expand('%'))
+  print("📎 Relativní cesta zkopírována do schránky: " .. vim.fn.expand('%'))
+end, { desc = "Copy relative path to clipboard" })
+
 -- Move lines up and down
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
