@@ -92,7 +92,7 @@ require('neo-tree').setup {
   commands = {},
   window = {
     position = 'left',
-    width = 60,
+    width = 40,
     mapping_options = {
       noremap = true,
       nowait = true,
@@ -194,8 +194,8 @@ require('neo-tree').setup {
     follow_current_file = {
       enabled = true,
     },
-    group_empty_dirs = false,               -- when true, empty folders will be grouped together
-    hijack_netrw_behavior = "disabled",  -- Změněno z "open_current" nebo podobné hodnoty
+    group_empty_dirs = false,           -- when true, empty folders will be grouped together
+    hijack_netrw_behavior = "disabled", -- Změněno z "open_current" nebo podobné hodnoty
     -- in whatever position is specified in window.position
     -- "open_current",  -- netrw disabled, opening a directory opens within the
     -- window like netrw would, regardless of window.position

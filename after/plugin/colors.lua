@@ -1,5 +1,5 @@
 function ColorMyPencil(color)
-  color = color or "tokyonight" -- solarized-osaka, rose-pine, tokyonight, mellow, vscode
+  color = color or "solarized-osaka" -- solarized-osaka, rose-pine, tokyonight, mellow, vscode
   vim.cmd.colorscheme(color)
 
   vim.cmd [[

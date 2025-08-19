@@ -48,6 +48,13 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 -- Define a custom highlight group for yanked text
 
+vim.o.autoread = true
+
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold" }, {
+  pattern = "*",
+  command = "checktime",
+})
+
 vim.diagnostic.config({
   severity_sort = true,
 })
