@@ -41,22 +41,23 @@ end
 local opts = {
 	-- If terminal_cmd is nil the plugin will fall back to the default "claude"
 	terminal_cmd = terminal_cmd,
-	auto_start = false,
-	log_level = "info",
+	auto_start = true,
+	log_level = "info", 
 	track_selection = true,
+	visual_demotion_delay_ms = 50,
 	terminal = {
 		split_side = "right", -- "left" or "right"
-      split_width_percentage = 0.30,
-      provider = "auto", -- "auto", "snacks", "native", "external", or custom provider table
-      auto_close = true,
-      snacks_win_opts = {}, -- Opts to pass to `Snacks.terminal.open()` - see Floating Window section below
+		split_width_percentage = 0.30,
+		provider = "auto", -- "auto", "snacks", "native", "external", or custom provider table
+		auto_close = true,
+		snacks_win_opts = {}, -- Opts to pass to `Snacks.terminal.open()` - see Floating Window section below
 
-      -- Provider-specific options
-      provider_opts = {
-        external_terminal_cmd = nil, -- Command template for external terminal provider (e.g., "alacritty -e %s")
-      },
+		-- Provider-specific options
+		provider_opts = {
+			external_terminal_cmd = nil, -- Command template for external terminal provider (e.g., "alacritty -e %s")
 		},
-	}
+	},
+}
 
 -- Safe require: if the plugin isn't installed don't error out
 local ok, claudecode = pcall(require, "claudecode")
@@ -95,6 +96,79 @@ safe_map("n", "<leader>ab", "<cmd>ClaudeCodeAdd %<cr>", { desc = "Claude: Add bu
 safe_map("n", "<leader>aa", "<cmd>ClaudeCodeDiffAccept<cr>", { desc = "Claude: Accept diff" })
 safe_map("n", "<leader>ad", "<cmd>ClaudeCodeDiffDeny<cr>", { desc = "Claude: Deny diff" })
 safe_map("n", "<leader>am", "<cmd>ClaudeCodeSelectModel<cr>", { desc = "Claude: Select model" })
+
+-- Additional context management mappings
+safe_map("n", "<leader>ca", function()
+  local filepath = vim.fn.expand("%:p")
+  vim.cmd("ClaudeCodeAdd " .. filepath)
+end, { desc = "Claude: Add current file to context" })
+
+safe_map("n", "<leader>cd", function()
+  local dirpath = vim.fn.expand("%:p:h")
+  vim.cmd("ClaudeCodeAdd " .. dirpath)
+end, { desc = "Claude: Add current directory to context" })
+
+-- Use standard selection sending (relies on selection tracking)
+-- Note: <leader>as is already mapped above by the standard mappings
+
+safe_map("n", "<leader>cb", function()
+  -- First add current file to context, then send entire buffer
+  local filepath = vim.fn.expand("%:p")
+  vim.cmd("ClaudeCodeAdd " .. filepath)
+  
+  vim.defer_fn(function()
+    vim.cmd("normal! ggVG")
+    vim.cmd("ClaudeCodeSend")
+    vim.cmd("normal! <Esc>")
+  end, 100)
+end, { desc = "Claude: Add file to context and send buffer" })
+
+safe_map("n", "<leader>cl", function()
+  -- Add current file to context first
+  local filepath = vim.fn.expand("%:p")
+  vim.cmd("ClaudeCodeAdd " .. filepath)
+  
+  vim.defer_fn(function()
+    local line = vim.api.nvim_get_current_line()
+    -- Create temporary selection and send
+    vim.cmd("normal! V")
+    vim.cmd("ClaudeCodeSend")
+    vim.cmd("normal! <Esc>")
+  end, 100)
+end, { desc = "Claude: Add file to context and send current line" })
+
+-- Custom navigation mappings for terminal and visual mode
+-- Terminal mode navigation shortcuts
+-- Allow Ctrl+h,j,k,l to navigate between windows from terminal mode
+safe_map("t", "<C-h>", "<C-\\><C-n><C-w>h", { desc = "Go to left window from terminal" })
+safe_map("t", "<C-j>", "<C-\\><C-n><C-w>j", { desc = "Go to window below from terminal" })
+safe_map("t", "<C-k>", "<C-\\><C-n><C-w>k", { desc = "Go to window above from terminal" })
+safe_map("t", "<C-l>", "<C-\\><C-n><C-w>l", { desc = "Go to right window from terminal" })
+
+-- Visual mode navigation shortcuts  
+-- Allow Ctrl+h,j,k,l to navigate between windows from visual mode
+safe_map("v", "<C-h>", "<Esc><C-w>h", { desc = "Go to left window from visual mode" })
+safe_map("v", "<C-j>", "<Esc><C-w>j", { desc = "Go to window below from visual mode" })
+safe_map("v", "<C-k>", "<Esc><C-w>k", { desc = "Go to window above from visual mode" })
+safe_map("v", "<C-l>", "<Esc><C-w>l", { desc = "Go to right window from visual mode" })
+
+-- Easy escape from terminal mode
+safe_map("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+
+-- Quick return to terminal mode after navigation
+safe_map("n", "<leader>ct", function()
+  -- Find terminal buffer and enter terminal mode
+  for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+    if vim.bo[buf].buftype == 'terminal' then
+      local wins = vim.fn.win_findbuf(buf)
+      if #wins > 0 then
+        vim.api.nvim_set_current_win(wins[1])
+        vim.cmd("startinsert")
+        break
+      end
+    end
+  end
+end, { desc = "Return to terminal and enter insert mode" })
 
 -- Helpful note for users (visible when editing this file):
 -- If you installed Claude Code locally via the migrate-installer, ensure
