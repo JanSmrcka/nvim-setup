@@ -184,11 +184,5 @@ return require('packer').startup(function(use)
   -- =======================
   -- 📝 Auto Commit Plugin
   -- =======================
-  use {
-
-  '/Users/jansmrcka/git/private/projects/nvim-auto-commit',
-    config = function()
-      require('nvim-auto-commit').setup()
-    end
-  }
+  use 'JanSmrcka/nvim-auto-commit'
 end)
