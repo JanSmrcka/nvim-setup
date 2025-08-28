@@ -1,3 +1,10 @@
+
+-- Compatibility shim for older/newer Neovim/null-ls API
+-- Ensures vim.lsp._request_name_to_capability is at least an empty table
+-- so null-ls won't error when indexing it.
+if vim and vim.lsp and vim.lsp._request_name_to_capability == nil then
+  vim.lsp._request_name_to_capability = {}
+end
 local lsp_zero = require('lsp-zero')
 
 lsp_zero.on_attach(function(client, bufnr)
@@ -28,14 +35,43 @@ require('mason-lspconfig').setup({
     'eslint',
     'gopls' -- Go language server
   },
-  handlers = {
+  -- disable automatic enabling of installed servers to avoid calling vim.lsp.enable()
+  automatic_enable = false,
+})
+
+-- Use setup_handlers for per-server handlers (recommended API)
+-- Register handlers in a version-compatible way
+do
+  local mlsp = require('mason-lspconfig')
+  local handlers = {
+    -- default handler: use lsp-zero's default setup
     lsp_zero.default_setup,
-    lua_ls = function()
+    -- custom handler for lua_ls
+    ['lua_ls'] = function()
       local lua_opts = lsp_zero.nvim_lua_ls()
       require('lspconfig').lua_ls.setup(lua_opts)
     end,
   }
-})
+
+  if type(mlsp.setup_handlers) == 'function' then
+    mlsp.setup_handlers(handlers)
+  else
+    -- older versions expect handlers passed to setup; re-call setup with handlers
+    mlsp.setup({
+      ensure_installed = {
+        'ts_ls',
+        'lua_ls',
+        'cssls',
+        'html',
+        'jsonls',
+        'eslint',
+        'gopls'
+      },
+      automatic_enable = false,
+      handlers = handlers,
+    })
+  end
+end
 
 -- Nastavení pro jednotlivé LSP servery
 require('lspconfig').ts_ls.setup({})

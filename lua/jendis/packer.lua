@@ -134,6 +134,15 @@ return require('packer').startup(function(use)
   -- Configuration will be in after/plugin/avante.lua
   -- end
   --}
+  --
+  -- Snacks.nvim (utility library)
+  use "folke/snacks.nvim"
+  
+  -- Claude Code Integration
+  use {
+    "coder/claudecode.nvim",
+    requires = { "folke/snacks.nvim" }
+  }
   use {
     'windwp/nvim-autopairs', -- Auto close brackets, quotes, etc.
     config = function() require('nvim-autopairs').setup() end
