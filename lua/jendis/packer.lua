@@ -180,4 +180,15 @@ return require('packer').startup(function(use)
       require('alpha').setup(require('alpha.themes.dashboard').config)
     end
   }
+
+  -- =======================
+  -- 📝 Auto Commit Plugin
+  -- =======================
+  use {
+
+  '/Users/jansmrcka/git/private/projects/nvim-auto-commit',
+    config = function()
+      require('nvim-auto-commit').setup()
+    end
+  }
 end)
