@@ -109,7 +109,17 @@ Personal Neovim configuration focused on React/TypeScript development with beaut
 | `<C-e>`    | Abort completion         |
 | `<CR>`     | Confirm selection        |
 
-### 🤖 Claude Code Integration
+### 🤖 AI Integration
+
+#### GitHub Copilot (Inline Suggestions)
+| Keybind    | Description                          |
+| ---------- | ------------------------------------ |
+| `Tab`      | Accept Copilot suggestion            |
+| `Alt+]`    | Next Copilot suggestion              |
+| `Alt+[`    | Previous Copilot suggestion          |
+| `Ctrl+]`   | Dismiss Copilot suggestion           |
+
+#### Claude Code Integration
 
 **Core Commands:**
 | Keybind      | Description                        |
@@ -167,7 +177,7 @@ Personal Neovim configuration focused on React/TypeScript development with beaut
 
 ### 🚀 Modern Development Stack
 - 🎯 **LSP Integration**: TypeScript, React, CSS, HTML, JSON, ESLint, Go support
-- 🤖 **AI Integration**: Claude Code with real-time selection tracking
+- 🤖 **Dual AI Integration**: GitHub Copilot (inline) + Claude Code (chat-based)
 - ⚡ **Smart Autocompletion**: Context-aware suggestions with snippets
 - 🔧 **Auto-formatting**: ESLint auto-fix on save + Prettier integration
 
@@ -186,6 +196,7 @@ Personal Neovim configuration focused on React/TypeScript development with beaut
 - 🔄 **Visual Undo Tree**: History visualization
 
 ### 🤖 AI-Powered Development
+- ⚡ **Inline Suggestions**: GitHub Copilot for instant code completions
 - 🎯 **Selection Tracking**: Claude sees your selections in real-time
 - 🚀 **Auto-start**: Claude launches automatically when needed
 - 📂 **Context Management**: Smart file and directory context
@@ -211,6 +222,7 @@ Personal Neovim configuration focused on React/TypeScript development with beaut
 - `gopls` - Go
 
 ### AI Integration
+- **GitHub Copilot** - Sign in via `:Copilot auth`
 - **Claude Code CLI** - Installed at `~/.claude/local/claude`
 - **Snacks.nvim** - Terminal provider for floating windows
 
@@ -299,9 +311,12 @@ nvim
 ```
 *In Mason UI, install: `typescript-language-server`, `lua-language-server`, `css-lsp`, `html-lsp`, `json-lsp`, `eslint-lsp`, `gopls`*
 
-**5. Verify Claude Code integration:**
+**5. Setup AI integrations:**
 ```vim
-# Open a file and try:
+# Authenticate GitHub Copilot:
+:Copilot auth
+
+# Verify Claude Code integration - open a file and try:
 <leader>ac
 ```
 
@@ -379,11 +394,18 @@ git pull origin main
 
 ## 💡 Development Workflow
 
-1. **Open project**: `<leader>pf` or `<C-p>` for git files
-2. **Add to AI context**: `<leader>ca` (current file) or `<leader>cd` (directory)  
-3. **Start AI chat**: `<leader>ac` to toggle Claude
-4. **Navigate seamlessly**: `<C-h/j/k/l>` between editor and AI
-5. **Send code to AI**: Select code, press `<leader>as`
-6. **Apply suggestions**: `<leader>aa` to accept, `<leader>ad` to deny
+### 🚀 AI-Enhanced Development Flow
 
-Perfect for React/TypeScript development with AI-powered coding assistance!
+1. **Open project**: `<leader>pf` or `<C-p>` for git files
+2. **Inline AI coding**: Start typing - Copilot provides suggestions (accept with `Tab`)
+3. **Add to Claude context**: `<leader>ca` (current file) or `<leader>cd` (directory)  
+4. **Start AI chat**: `<leader>ac` to toggle Claude for complex questions
+5. **Navigate seamlessly**: `<C-h/j/k/l>` between editor and AI
+6. **Send code to AI**: Select code, press `<leader>as`
+7. **Apply suggestions**: `<leader>aa` to accept, `<leader>ad` to deny
+
+### 🎯 Best of Both AI Worlds
+- **Copilot**: Instant inline completions while typing
+- **Claude Code**: Deep discussions, refactoring, architecture questions
+
+Perfect for React/TypeScript development with dual AI assistance! 🚀
