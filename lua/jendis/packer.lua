@@ -110,8 +110,7 @@ return require('packer').startup(function(use)
   -- =======================
   -- 🛠️ Formátování a linting
   -- =======================
-  use 'jose-elias-alvarez/null-ls.nvim' -- Pro custom LSP-based formátování
-  use 'MunifTanjim/prettier.nvim'       -- Podpora Prettier pro formátování
+  use 'stevearc/conform.nvim' -- Modern formatter plugin
 
   -- =======================
   -- 🤖 AI Assist

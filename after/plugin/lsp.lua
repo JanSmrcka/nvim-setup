@@ -88,15 +88,7 @@ require('lspconfig').lua_ls.setup({
 require('lspconfig').cssls.setup({})
 require('lspconfig').html.setup({})
 require('lspconfig').jsonls.setup({})
-require('lspconfig').eslint.setup({
-  -- Automatická oprava při uložení
-  on_attach = function(client, bufnr)
-    vim.api.nvim_create_autocmd("BufWritePre", {
-      buffer = bufnr,
-      command = "EslintFixAll",
-    })
-  end,
-})
+require('lspconfig').eslint.setup({})
 
 -- Konfigurace pro Go
 require('lspconfig').gopls.setup({

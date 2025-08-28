@@ -39,7 +39,7 @@ require('gitsigns').setup({
       return '<Ignore>'
     end, { expr = true })
 
-    -- Akce
+   -- Akce
     map('n', '<leader>gb', gs.toggle_current_line_blame)                -- Toggle git blame
     map('n', '<leader>gB', function() gs.blame_line { full = true } end) -- Detailní blame
     map('n', '<leader>gp', gs.preview_hunk)                             -- Náhled změn
