@@ -33,6 +33,7 @@ require('mason-lspconfig').setup({
     'html',
     'jsonls',
     'eslint',
+    'tailwindcss', -- Tailwind CSS Language Server
     'gopls' -- Go language server
   },
   -- disable automatic enabling of installed servers to avoid calling vim.lsp.enable()
@@ -65,6 +66,7 @@ do
         'html',
         'jsonls',
         'eslint',
+        'tailwindcss',
         'gopls'
       },
       automatic_enable = false,
@@ -89,6 +91,7 @@ require('lspconfig').cssls.setup({})
 require('lspconfig').html.setup({})
 require('lspconfig').jsonls.setup({})
 require('lspconfig').eslint.setup({})
+require('lspconfig').tailwindcss.setup({})
 
 -- Konfigurace pro Go
 require('lspconfig').gopls.setup({

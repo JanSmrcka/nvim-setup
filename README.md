@@ -66,6 +66,14 @@ Personal Neovim configuration focused on React/TypeScript development with beaut
 | `<leader>fb` | File browser modal                         |
 | `<C-b>`      | File browser in current buffer's directory |
 
+**Telescope Actions (within picker):**
+| Keybind | Description                    |
+| ------- | ------------------------------ |
+| `<C-q>` | Send all results to quickfix list |
+| `<C-j>` | Move to next item              |
+| `<C-k>` | Move to previous item          |
+| `<C-l>` | Select item                    |
+
 ### 📌 Harpoon
 
 | Keybind       | Description              |
@@ -161,11 +169,43 @@ Personal Neovim configuration focused on React/TypeScript development with beaut
 
 ### 🌳 Git
 
-| Keybind      | Description |
-| ------------ | ----------- |
-| `<leader>gs` | Git status  |
-| `<leader>gc` | Git commit  |
-| `<leader>gp` | Git push    |
+**Git Operations (Fugitive):**
+| Keybind       | Description |
+| ------------- | ----------- |
+| `<leader>gs`  | Git status  |
+| `<leader>gc`  | Git commit  |
+| `<leader>gp`  | Git push    |
+| `<leader>gac` | AI Commit with auto-generated message |
+
+**Git Navigation & Actions (Gitsigns):**
+| Keybind      | Description                    |
+| ------------ | ------------------------------ |
+| `]c`         | Next git change                |
+| `[c`         | Previous git change            |
+| `<leader>gb` | Toggle git blame               |
+| `<leader>gB` | Detailed git blame             |
+| `<leader>gh` | Preview hunk                   |
+| `<leader>gr` | Reset hunk                     |
+| `<leader>gR` | Reset buffer                   |
+| `<leader>gu` | Unstage hunk                   |
+| `<leader>gd` | Git diff                       |
+
+### 🔄 Quickfix List
+
+| Keybind     | Description                |
+| ----------- | -------------------------- |
+| `<M-j>`     | Next quickfix item         |
+| `<M-k>`     | Previous quickfix item     |
+| `<leader>j` | Next location list item    |
+| `<leader>k` | Previous location list item|
+
+### 🌳 File Explorer (Neo-tree)
+
+| Keybind      | Description                |
+| ------------ | -------------------------- |
+| `<leader>e`  | Toggle Neo-tree            |
+| `\`          | Reveal current file in Neo-tree |
+| `<leader>ngs`| Open git status window     |
 
 ### 🔄 Undo
 

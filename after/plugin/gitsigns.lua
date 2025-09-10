@@ -42,7 +42,7 @@ require('gitsigns').setup({
    -- Akce
     map('n', '<leader>gb', gs.toggle_current_line_blame)                -- Toggle git blame
     map('n', '<leader>gB', function() gs.blame_line { full = true } end) -- Detailní blame
-    map('n', '<leader>gp', gs.preview_hunk)                             -- Náhled změn
+    map('n', '<leader>gh', gs.preview_hunk)                             -- Náhled změn
     map('n', '<leader>gr', gs.reset_hunk)                               -- Reset změn v hunku
     map('n', '<leader>gR', gs.reset_buffer)                             -- Reset celého bufferu
     map('n', '<leader>gu', gs.undo_stage_hunk)                          -- Unstage hunk
