@@ -25,11 +25,12 @@ return require('packer').startup(function(use)
   -- =======================
   -- 🎨 Barevná schémata
   -- =======================
-  use({ "rose-pine/neovim", as = "rose-pine" })
+  use({ "rose-pine/neovim", as = "rose-pine", tag = "v3.*" })
   use({ "folke/tokyonight.nvim", as = "tokyonight" })
   use({ "mellow-theme/mellow.nvim", as = "mellow" })
   use({ "craftzdog/solarized-osaka.nvim", as = "osaka" })
-  use "olimorris/onedarkpro.nvim"
+  use { "catppuccin/nvim", as = "catppuccin" }
+  use 'navarasu/onedark.nvim'
   use 'Mofiqul/vscode.nvim'
 
   -- =======================
@@ -136,7 +137,7 @@ return require('packer').startup(function(use)
   --
   -- Snacks.nvim (utility library)
   use "folke/snacks.nvim"
-  
+
   -- Claude Code Integration
   use {
     "coder/claudecode.nvim",

@@ -31,4 +31,4 @@ vim.keymap.set("n", "[t", function()
 end, { desc = "Previous todo comment" })
 
 -- Search todo comments using Telescope
-vim.keymap.set("n", "<leader>ft", ":TodoTelescope<CR>", { desc = "Find todos" }) 
+vim.keymap.set("n", "<leader>pt", ":TodoTelescope<CR>", { desc = "Find todos" }) 

@@ -1,14 +1,19 @@
 local alpha = require("alpha")
 local dashboard = require("alpha.themes.dashboard")
 
--- Function to create a colorful header
+-- Function to create a colorful header using centralized colors
 local function create_colored_header()
+    local theme_colors = GetCurrentColors and GetCurrentColors() or {
+        primary = "#61afef", secondary = "#c678dd", accent = "#56b6c2",
+        success = "#98c379", warning = "#e5c07b"
+    }
+
     local colors = {
-        "#89b4fa", -- Catppuccin blue
-        "#f5c2e7", -- Catppuccin pink
-        "#a6e3a1", -- Catppuccin green
-        "#fab387", -- Catppuccin peach
-        "#94e2d5", -- Catppuccin teal
+        theme_colors.primary,
+        theme_colors.secondary,
+        theme_colors.success,
+        theme_colors.warning,
+        theme_colors.accent,
     }
 
     return {
@@ -29,7 +34,7 @@ local function create_colored_header()
         },
         opts = {
             position = "center",
-            hl = "#f5c2e7",  -- Výchozí barva (Catppuccin pink)
+            hl = "String", -- Použije výchozí barvu tématu
         },
     }
 end
@@ -109,26 +114,20 @@ dashboard.section.footer = {
     },
 }
 
--- Set custom highlights
-vim.api.nvim_set_hl(0, 'AlphaHeader', { fg = '#89b4fa' })    -- Catppuccin blue
-vim.api.nvim_set_hl(0, 'AlphaButtons', { fg = '#a6e3a1' })   -- Catppuccin green
-vim.api.nvim_set_hl(0, 'AlphaStats', { fg = '#f5c2e7' })     -- Catppuccin pink
-vim.api.nvim_set_hl(0, 'AlphaQuote', { fg = '#fab387' })     -- Catppuccin peach
-vim.api.nvim_set_hl(0, 'AlphaSocial', { fg = '#94e2d5' })    -- Catppuccin teal
-vim.api.nvim_set_hl(0, 'AlphaCopyright', { fg = '#9399b2', italic = true }) -- Subtle gray with italic
+-- Barvy Alpha se nyní nastavují centrálně v colors.lua
 
--- Apply highlights and center alignment
+-- Apply highlights and center alignment using default theme colors
 dashboard.section.header.opts = {
     position = "center",
-    hl = "AlphaHeader"
+    hl = "String"
 }
 dashboard.section.buttons.opts = {
     position = "center",
-    hl = "AlphaButtons"
+    hl = "Function"
 }
 dashboard.section.stats.opts = {
     position = "center",
-    hl = "AlphaStats"
+    hl = "Number"
 }
 
 -- Layout configuration
@@ -157,21 +156,5 @@ vim.cmd([[
     autocmd FileType alpha setlocal nofoldenable
 ]])
 
--- Print debug info when alpha loads
-vim.api.nvim_create_autocmd("User", {
-    pattern = "AlphaReady",
-    callback = function()
-        local colors = {
-            "#89b4fa", -- Catppuccin blue
-            "#f5c2e7", -- Catppuccin pink
-            "#a6e3a1", -- Catppuccin green
-            "#fab387", -- Catppuccin peach
-            "#94e2d5", -- Catppuccin teal
-        }
-        vim.api.nvim_set_hl(0, 'AlphaHeader', { fg = colors[math.random(#colors)] })
-        for _, val in ipairs(dashboard.section.header.val) do
-            vim.api.nvim_set_hl(0, 'AlphaHeader', { fg = colors[math.random(#colors)] })
-        end
-    end,
-})
+-- Alpha používá výchozí barvy tématu
 

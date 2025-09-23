@@ -1,38 +1,24 @@
 -- Setup lualine
+-- Dynamické získání barev z centralizované konfigurace
+local function get_lualine_theme()
+  local colors = GetCurrentColors and GetCurrentColors() or {
+    primary = "#61afef",
+    secondary = "#c678dd",
+    success = "#98c379",
+    warning = "#e5c07b",
+    error = "#e06c75",
+    info = "#61afef",
+    fg_sidebar = "#abb2bf",
+    border = "#3e4451"
+  }
+
+  -- Vrátit 'auto' aby Lualine použila výchozí barvy aktuálního tématu
+  return 'auto'
+end
+
 require('lualine').setup {
   options = {
-    theme = {
-      normal = {
-        a = { fg = '#1E1E2E', bg = '#89B4FA', gui = 'bold' }, -- Tmavý text na modré
-        b = { fg = '#CDD6F4', bg = '#313244' },
-        c = { fg = '#CDD6F4', bg = '#1E1E2E' },
-      },
-      insert = {
-        a = { fg = '#1E1E2E', bg = '#A6E3A1', gui = 'bold' }, -- Tmavý text na zelené
-        b = { fg = '#CDD6F4', bg = '#313244' },
-        c = { fg = '#CDD6F4', bg = '#1E1E2E' },
-      },
-      visual = {
-        a = { fg = '#1E1E2E', bg = '#F5C2E7', gui = 'bold' }, -- Tmavý text na růžové
-        b = { fg = '#CDD6F4', bg = '#313244' },
-        c = { fg = '#CDD6F4', bg = '#1E1E2E' },
-      },
-      replace = {
-        a = { fg = '#1E1E2E', bg = '#F38BA8', gui = 'bold' }, -- Tmavý text na červené
-        b = { fg = '#CDD6F4', bg = '#313244' },
-        c = { fg = '#CDD6F4', bg = '#1E1E2E' },
-      },
-      command = {
-        a = { fg = '#1E1E2E', bg = '#FAB387', gui = 'bold' }, -- Tmavý text na oranžové
-        b = { fg = '#CDD6F4', bg = '#313244' },
-        c = { fg = '#CDD6F4', bg = '#1E1E2E' },
-      },
-      inactive = {
-        a = { fg = '#CDD6F4', bg = '#1E1E2E', gui = 'bold' },
-        b = { fg = '#CDD6F4', bg = '#1E1E2E' },
-        c = { fg = '#CDD6F4', bg = '#1E1E2E' },
-      },
-    },
+    theme = get_lualine_theme(),
     section_separators = { left = '', right = '' },   -- Fancy section separators
     component_separators = { left = '', right = '' }, -- Fancy component separators
     disabled_filetypes = {
