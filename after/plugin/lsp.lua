@@ -1,4 +1,3 @@
-
 -- Compatibility shim for older/newer Neovim/null-ls API
 -- Ensures vim.lsp._request_name_to_capability is at least an empty table
 -- so null-ls won't error when indexing it.
@@ -7,20 +6,46 @@ if vim and vim.lsp and vim.lsp._request_name_to_capability == nil then
 end
 local lsp_zero = require('lsp-zero')
 
-lsp_zero.on_attach(function(client, bufnr)
+-- single on_attach used both by lsp-zero and server configs
+local function on_attach(client, bufnr)
   local opts = { buffer = bufnr, remap = false }
+
+  -- diagnostic navigation wrappers for compatibility across versions
+  local function diag_goto_next()
+    local d = vim.diagnostic
+    if d and d.goto_next then return d.goto_next({}) end
+    if d and d.jump then return d.jump({ count = 1 }) end
+    if vim.lsp and vim.lsp.diagnostic and vim.lsp.diagnostic.goto_next then
+      return vim.lsp.diagnostic.goto_next()
+    end
+  end
+  local function diag_goto_prev()
+    local d = vim.diagnostic
+    if d and d.goto_prev then return d.goto_prev({}) end
+    if d and d.jump then return d.jump({ count = -1 }) end
+    if vim.lsp and vim.lsp.diagnostic and vim.lsp.diagnostic.goto_prev then
+      return vim.lsp.diagnostic.goto_prev()
+    end
+  end
 
   vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
   vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
   vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
+  -- use new diagnostics API (vim.diagnostic)
   vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
-  vim.keymap.set("n", "<C-]>", function() vim.diagnostic.goto_next() end, opts)
-  vim.keymap.set("n", "<C-[>", function() vim.diagnostic.goto_prev() end, opts)
+  vim.keymap.set("n", "<C-]>", diag_goto_next, opts)
+  vim.keymap.set("n", "<C-[>", diag_goto_prev, opts)
+  -- Also provide standard ]d/[d diagnostic jumps
+  vim.keymap.set("n", "]d", diag_goto_next, opts)
+  vim.keymap.set("n", "[d", diag_goto_prev, opts)
   vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, opts)
   vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, opts)
   vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
   vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
-end)
+end
+
+-- keep lsp-zero aware of our on_attach as well (features like format helpers)
+lsp_zero.on_attach(on_attach)
 
 -- to learn how to use mason.nvim with lsp-zero
 -- read this: https://github.com/VonHeikemen/lsp-zero.nvim/blob/v3.x/doc/md/guides/integrate-with-mason-nvim.md
@@ -34,67 +59,54 @@ require('mason-lspconfig').setup({
     'jsonls',
     'eslint',
     'tailwindcss', -- Tailwind CSS Language Server
-    'gopls' -- Go language server
+    'gopls'        -- Go language server
   },
   -- disable automatic enabling of installed servers to avoid calling vim.lsp.enable()
   automatic_enable = false,
 })
 
--- Use setup_handlers for per-server handlers (recommended API)
--- Register handlers in a version-compatible way
-do
-  local mlsp = require('mason-lspconfig')
-  local handlers = {
-    -- default handler: use lsp-zero's default setup
-    lsp_zero.default_setup,
-    -- custom handler for lua_ls
-    ['lua_ls'] = function()
-      local lua_opts = lsp_zero.nvim_lua_ls()
-      require('lspconfig').lua_ls.setup(lua_opts)
-    end,
-  }
+-- capabilities (cmp integration)
+local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-  if type(mlsp.setup_handlers) == 'function' then
-    mlsp.setup_handlers(handlers)
+-- helper to support both new vim.lsp.config and legacy lspconfig
+local function set_server(name, opts)
+  if vim.lsp and vim.lsp.config then
+    vim.lsp.config[name] = opts
   else
-    -- older versions expect handlers passed to setup; re-call setup with handlers
-    mlsp.setup({
-      ensure_installed = {
-        'ts_ls',
-        'lua_ls',
-        'cssls',
-        'html',
-        'jsonls',
-        'eslint',
-        'tailwindcss',
-        'gopls'
-      },
-      automatic_enable = false,
-      handlers = handlers,
-    })
+    require('lspconfig')[name].setup(opts)
   end
 end
 
--- Nastavení pro jednotlivé LSP servery
-require('lspconfig').ts_ls.setup({})
-require('lspconfig').lua_ls.setup({
-  settings = {
-    Lua = {
-      diagnostics = {
-        globals = { 'vim' } -- Uznává 'vim' jako globální proměnnou
-      }
-    }
-  }
+-- LSP server configurations (new API preferred)
+set_server('ts_ls', {
+  on_attach = on_attach,
+  capabilities = lsp_capabilities,
 })
 
-require('lspconfig').cssls.setup({})
-require('lspconfig').html.setup({})
-require('lspconfig').jsonls.setup({})
-require('lspconfig').eslint.setup({})
-require('lspconfig').tailwindcss.setup({})
+-- Lua: start from lsp-zero's recommended options and extend
+do
+  local lua_opts = lsp_zero.nvim_lua_ls()
+  lua_opts.on_attach = on_attach
+  lua_opts.capabilities = lsp_capabilities
+  -- keep explicit diagnostics for 'vim' global
+  lua_opts.settings = lua_opts.settings or {}
+  lua_opts.settings.Lua = lua_opts.settings.Lua or {}
+  lua_opts.settings.Lua.diagnostics = lua_opts.settings.Lua.diagnostics or {}
+  lua_opts.settings.Lua.diagnostics.globals = lua_opts.settings.Lua.diagnostics.globals or { 'vim' }
+  set_server('lua_ls', lua_opts)
+end
 
--- Konfigurace pro Go
-require('lspconfig').gopls.setup({
+for _, name in ipairs({ 'cssls', 'html', 'jsonls', 'eslint', 'tailwindcss' }) do
+  set_server(name, {
+    on_attach = on_attach,
+    capabilities = lsp_capabilities,
+  })
+end
+
+-- Go (gopls)
+set_server('gopls', {
+  on_attach = on_attach,
+  capabilities = lsp_capabilities,
   settings = {
     gopls = {
       analyses = {
@@ -106,6 +118,11 @@ require('lspconfig').gopls.setup({
     },
   },
 })
+
+-- enable the new LSP auto-manager if available (Neovim 0.11+)
+if vim.lsp and type(vim.lsp.enable) == 'function' then
+  vim.lsp.enable({ 'ts_ls', 'lua_ls', 'cssls', 'html', 'jsonls', 'eslint', 'tailwindcss', 'gopls' })
+end
 
 local cmp = require('cmp')
 local cmp_select = { behavior = cmp.SelectBehavior.Select }

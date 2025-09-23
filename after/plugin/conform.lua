@@ -14,7 +14,13 @@ require("conform").setup({
     yaml = { "prettier" },
     markdown = { "prettier" },
     graphql = { "prettier" },
-    go = { "gofmt", "goimports" },
+    -- pick only available formatters to avoid health warnings
+    go = function()
+      local f = {}
+      if vim.fn.executable('gofmt') == 1 then table.insert(f, 'gofmt') end
+      if vim.fn.executable('goimports') == 1 then table.insert(f, 'goimports') end
+      return f
+    end,
   },
   format_on_save = {
     -- These options will be passed to conform.format()

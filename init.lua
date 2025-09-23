@@ -23,8 +23,6 @@ end
 vim.api.nvim_create_autocmd("VimEnter", {
   group = vim.api.nvim_create_augroup("StartupGroup", { clear = true }),
   callback = function()
-    print("VimEnter triggered")
-
     -- Get current buffer info
     local current_buf = vim.api.nvim_get_current_buf()
     local buf_name = vim.api.nvim_buf_get_name(current_buf)
