@@ -203,7 +203,7 @@ _G.packer_plugins = {
     url = "https://github.com/nvim-tree/nvim-web-devicons"
   },
   ["nvim-window-picker"] = {
-    config = { "\27LJ\2\nå\2\0\0\6\0\f\0\0156\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\n\0005\3\3\0005\4\5\0005\5\4\0=\5\6\4=\4\a\0035\4\b\0=\4\t\3=\3\v\2B\0\2\1K\0\1\0\17filter_rules\1\0\1\17filter_rules\0\fbuftype\1\3\0\0\rterminal\rquickfix\abo\rfiletype\1\0\1\rfiletype\0\1\4\0\0\rneo-tree\19neo-tree-popup\vnotify\1\0\4\24include_current_win\1\fbuftype\0\abo\0\19autoselect_one\2\nsetup\18window-picker\frequire\0" },
+    config = { "\27LJ\2\nå\2\0\0\6\0\f\0\0156\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\n\0005\3\3\0005\4\5\0005\5\4\0=\5\6\4=\4\a\0035\4\b\0=\4\t\3=\3\v\2B\0\2\1K\0\1\0\17filter_rules\1\0\1\17filter_rules\0\fbuftype\1\3\0\0\rterminal\rquickfix\abo\rfiletype\1\0\1\rfiletype\0\1\4\0\0\rneo-tree\19neo-tree-popup\vnotify\1\0\4\24include_current_win\1\abo\0\fbuftype\0\19autoselect_one\2\nsetup\18window-picker\frequire\0" },
     loaded = true,
     path = "/Users/jansmrcka/.local/share/nvim/site/pack/packer/start/nvim-window-picker",
     url = "https://github.com/s1n7ax/nvim-window-picker"
@@ -232,6 +232,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/jansmrcka/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
+  },
+  ["rainbow-delimiters.nvim"] = {
+    loaded = true,
+    path = "/Users/jansmrcka/.local/share/nvim/site/pack/packer/start/rainbow-delimiters.nvim",
+    url = "https://github.com/HiPhish/rainbow-delimiters.nvim"
   },
   ["rose-pine"] = {
     loaded = true,
@@ -293,30 +298,30 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: alpha-nvim
-time([[Config for alpha-nvim]], true)
-try_loadstring("\27LJ\2\na\0\0\5\0\5\0\n6\0\0\0'\2\1\0B\0\2\0029\0\2\0006\2\0\0'\4\3\0B\2\2\0029\2\4\2B\0\2\1K\0\1\0\vconfig\27alpha.themes.dashboard\nsetup\nalpha\frequire\0", "config", "alpha-nvim")
-time([[Config for alpha-nvim]], false)
--- Config for: nvim-window-picker
-time([[Config for nvim-window-picker]], true)
-try_loadstring("\27LJ\2\nå\2\0\0\6\0\f\0\0156\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\n\0005\3\3\0005\4\5\0005\5\4\0=\5\6\4=\4\a\0035\4\b\0=\4\t\3=\3\v\2B\0\2\1K\0\1\0\17filter_rules\1\0\1\17filter_rules\0\fbuftype\1\3\0\0\rterminal\rquickfix\abo\rfiletype\1\0\1\rfiletype\0\1\4\0\0\rneo-tree\19neo-tree-popup\vnotify\1\0\4\24include_current_win\1\fbuftype\0\abo\0\19autoselect_one\2\nsetup\18window-picker\frequire\0", "config", "nvim-window-picker")
-time([[Config for nvim-window-picker]], false)
--- Config for: gitsigns.nvim
-time([[Config for gitsigns.nvim]], true)
-try_loadstring("\27LJ\2\n6\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\rgitsigns\frequire\0", "config", "gitsigns.nvim")
-time([[Config for gitsigns.nvim]], false)
--- Config for: todo-comments.nvim
-time([[Config for todo-comments.nvim]], true)
-try_loadstring("\27LJ\2\n;\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\18todo-comments\frequire\0", "config", "todo-comments.nvim")
-time([[Config for todo-comments.nvim]], false)
 -- Config for: which-key.nvim
 time([[Config for which-key.nvim]], true)
 try_loadstring("\27LJ\2\n7\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\14which-key\frequire\0", "config", "which-key.nvim")
 time([[Config for which-key.nvim]], false)
+-- Config for: nvim-window-picker
+time([[Config for nvim-window-picker]], true)
+try_loadstring("\27LJ\2\nå\2\0\0\6\0\f\0\0156\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\n\0005\3\3\0005\4\5\0005\5\4\0=\5\6\4=\4\a\0035\4\b\0=\4\t\3=\3\v\2B\0\2\1K\0\1\0\17filter_rules\1\0\1\17filter_rules\0\fbuftype\1\3\0\0\rterminal\rquickfix\abo\rfiletype\1\0\1\rfiletype\0\1\4\0\0\rneo-tree\19neo-tree-popup\vnotify\1\0\4\24include_current_win\1\abo\0\fbuftype\0\19autoselect_one\2\nsetup\18window-picker\frequire\0", "config", "nvim-window-picker")
+time([[Config for nvim-window-picker]], false)
 -- Config for: nvim-autopairs
 time([[Config for nvim-autopairs]], true)
 try_loadstring("\27LJ\2\n<\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\19nvim-autopairs\frequire\0", "config", "nvim-autopairs")
 time([[Config for nvim-autopairs]], false)
+-- Config for: alpha-nvim
+time([[Config for alpha-nvim]], true)
+try_loadstring("\27LJ\2\na\0\0\5\0\5\0\n6\0\0\0'\2\1\0B\0\2\0029\0\2\0006\2\0\0'\4\3\0B\2\2\0029\2\4\2B\0\2\1K\0\1\0\vconfig\27alpha.themes.dashboard\nsetup\nalpha\frequire\0", "config", "alpha-nvim")
+time([[Config for alpha-nvim]], false)
+-- Config for: todo-comments.nvim
+time([[Config for todo-comments.nvim]], true)
+try_loadstring("\27LJ\2\n;\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\18todo-comments\frequire\0", "config", "todo-comments.nvim")
+time([[Config for todo-comments.nvim]], false)
+-- Config for: gitsigns.nvim
+time([[Config for gitsigns.nvim]], true)
+try_loadstring("\27LJ\2\n6\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\rgitsigns\frequire\0", "config", "gitsigns.nvim")
+time([[Config for gitsigns.nvim]], false)
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then

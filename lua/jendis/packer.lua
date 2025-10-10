@@ -68,6 +68,7 @@ return require('packer').startup(function(use)
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
   use 'nvim-treesitter/playground'
   use 'windwp/nvim-ts-autotag' -- Automatické zavírání HTML/XML tagů
+  use 'HiPhish/rainbow-delimiters.nvim' -- Rainbow závorky
 
   -- =======================
   -- 🔄 Historie a navigace
