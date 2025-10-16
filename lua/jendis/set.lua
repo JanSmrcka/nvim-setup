@@ -44,9 +44,7 @@ vim.opt.updatetime = 100
 
 vim.opt.colorcolumn = ""
 
-vim.cmd([[
-hi YankHighlight guibg=#ffeb3b guifg=red
-]])
+-- Yank highlight autocmd (samotné barvy se nastavují v colors.lua PO načtení tématu)
 vim.api.nvim_create_autocmd("TextYankPost", {
   callback = function()
     vim.highlight.on_yank({ higroup = "YankHighlight", timeout = 200 })

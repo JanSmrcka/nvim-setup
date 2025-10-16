@@ -18,6 +18,11 @@ function ColorMyPencil(color)
 
   vim.cmd.colorscheme(color)
 
+  -- Nastavení custom highlights PO načtení color scheme
+  -- Yank highlight s výraznou žlutou barvou
+  vim.cmd([[
+    hi YankHighlight guibg=#ffeb3b guifg=#000000
+  ]])
 
   -- Téma se nyní používá s výchozími barvami
   -- Pouze exportujeme barvy pro případné použití pluginy
