@@ -1,3 +1,6 @@
+-- Nastavení pro vertikální diff splity
+vim.opt.diffopt:append('vertical')
+
 require('gitsigns').setup({
   signs = {
     add          = { text = '│' },
