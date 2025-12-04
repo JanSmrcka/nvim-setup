@@ -1,71 +1,78 @@
+-- Neovim options and settings
+-- Migrated from lua/jendis/set.lua
+
+-- Line numbers
 vim.opt.nu = true
 vim.opt.relativenumber = true
+
+-- Disable netrw (using neo-tree instead)
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
-vim.opt.guicursor = "n-v-c:block-Cursor/lCursor"
-vim.opt.termguicolors = true
 
--- Disable optional remote providers to silence health warnings (enable if you need them)
-vim.g.loaded_node_provider = 0
-vim.g.loaded_python3_provider = 0
-vim.g.loaded_perl_provider = 0
-vim.g.loaded_ruby_provider = 0
-
-vim.opt.tabstop = 2
-vim.opt.softtabstop = 2
-vim.opt.shiftwidth = 2
-vim.opt.expandtab = true
--- Correct Lua syntax for setting 'guicursor'
+-- Cursor
 vim.opt.guicursor = {
   'n-v-c:block',   -- Normal, Visual, Command modes: block cursor
   'i-ci-ve:ver25', -- Insert, Command-line insert, Visual: vertical bar cursor
   'r-cr:hor20',    -- Replace mode: horizontal bar cursor
   'o:hor50',       -- Operator-pending mode: horizontal bar cursor
 }
+
+-- Colors
+vim.opt.termguicolors = true
+
+-- Disable optional remote providers to silence health warnings
+vim.g.loaded_node_provider = 0
+vim.g.loaded_python3_provider = 0
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_ruby_provider = 0
+
+-- Indentation
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
+vim.opt.shiftwidth = 2
+vim.opt.expandtab = true
 vim.opt.smartindent = true
 
+-- Line wrapping
 vim.opt.wrap = false
 
+-- Swap and backup
 vim.opt.swapfile = false
 vim.opt.backup = false
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.undofile = true
 
+-- Search
 vim.opt.hlsearch = true
 vim.opt.incsearch = true
 
-vim.opt.termguicolors = true
-
+-- Scrolling
 vim.opt.scrolloff = 12
 vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
 
+-- Update time
 vim.opt.updatetime = 100
 
+-- Color column
 vim.opt.colorcolumn = ""
 
--- Yank highlight autocmd (samotné barvy se nastavují v colors.lua PO načtení tématu)
-vim.api.nvim_create_autocmd("TextYankPost", {
-  callback = function()
-    vim.highlight.on_yank({ higroup = "YankHighlight", timeout = 200 })
-  end,
-})
--- Define a custom highlight group for yanked text
-
+-- Auto reload files
 vim.o.autoread = true
 
-vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold" }, {
-  pattern = "*",
-  command = "checktime",
-})
+-- Folding
+vim.opt.foldmethod = "indent"
+vim.opt.foldlevel = 99
+vim.opt.foldenable = true
 
+-- Diagnostics configuration
 vim.diagnostic.config({
   severity_sort = true,
   signs = {
     text = {
-      [vim.diagnostic.severity.ERROR] = ' ',
-      [vim.diagnostic.severity.WARN]  = ' ',
-      [vim.diagnostic.severity.INFO]  = ' ',
+      [vim.diagnostic.severity.ERROR] = ' ',
+      [vim.diagnostic.severity.WARN]  = ' ',
+      [vim.diagnostic.severity.INFO]  = ' ',
       [vim.diagnostic.severity.HINT]  = '󰌵',
     },
   },
@@ -73,9 +80,21 @@ vim.diagnostic.config({
     focusable = false,
     border = 'rounded',
     source = 'always',
-    -- ensure the float closes when you move away or switch files (e.g., via neo-tree)
     close_events = { 'BufLeave', 'CursorMoved', 'InsertEnter', 'FocusLost', 'BufHidden', 'BufEnter' },
   },
+})
+
+-- Yank highlight
+vim.api.nvim_create_autocmd("TextYankPost", {
+  callback = function()
+    vim.highlight.on_yank({ higroup = "YankHighlight", timeout = 200 })
+  end,
+})
+
+-- Auto reload on focus/buffer changes
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold" }, {
+  pattern = "*",
+  command = "checktime",
 })
 
 -- Close lingering floating windows when entering a normal file buffer
@@ -85,7 +104,8 @@ local function close_lingering_floats()
   local ft = vim.bo[buf].filetype
   local curwin = vim.api.nvim_get_current_win()
   local curcfg = vim.api.nvim_win_get_config(curwin)
-  -- If we are currently inside a floating window, don't close it.
+
+  -- If we are currently inside a floating window, don't close it
   if curcfg and curcfg.relative and curcfg.relative ~= '' then
     return
   end
@@ -135,7 +155,3 @@ local function focus_last_float()
 end
 
 vim.keymap.set('n', '<leader>vf', focus_last_float, { desc = 'Focus last floating window' })
-
-vim.opt.foldmethod = "indent"
-vim.opt.foldlevel = 99
-vim.opt.foldenable = true

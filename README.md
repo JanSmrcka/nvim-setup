@@ -1,6 +1,15 @@
 # 🚀 Modern Neovim Configuration
 
-Personal Neovim configuration focused on React/TypeScript development with beautiful UI, efficient workflows, and AI integration.
+Personal Neovim configuration focused on React/TypeScript development with beautiful UI, efficient workflows, and **triple AI integration** (Copilot inline + Copilot CLI + Sidekick) powered by **lazy.nvim**.
+
+## ✨ What's New
+
+- 🔄 **Migrated to lazy.nvim** - Modern plugin manager with lazy loading
+- 🤖 **Sidekick.nvim** - Enhanced AI integration with tmux support
+- 💬 **GitHub Copilot CLI** - Natural language AI conversations in terminal
+- 📁 **Modular Structure** - Organized config and plugin files
+- ⚡ **Faster Startup** - Optimized plugin loading
+- 🎯 **Triple AI Setup** - Copilot inline + Copilot CLI + Sidekick integration
 
 ## ⌨️ Key Mappings
 
@@ -24,11 +33,6 @@ Personal Neovim configuration focused on React/TypeScript development with beaut
 | `<C-k>` | Move to window above |
 | `<C-l>` | Move to right window |
 
-**Enhanced Navigation:**
-- Works from **terminal mode**, **visual mode**, and **normal mode**
-- `<Esc><Esc>` - Exit terminal mode
-- `<leader>ct` - Quick return to terminal and enter insert mode
-
 ### 📝 Text Manipulation
 
 | Keybind      | Description                          |
@@ -39,7 +43,7 @@ Personal Neovim configuration focused on React/TypeScript development with beaut
 | `<leader>y`  | Yank to system clipboard             |
 | `<leader>Y`  | Yank line to system clipboard        |
 | `<leader>d`  | Delete without yanking               |
-| `<leader>s`  | Search and replace word under cursor |
+| `<leader>sr` | Search and replace word under cursor |
 | `<leader>x`  | Make current file executable         |
 
 ### 🔍 Quick Navigation
@@ -56,15 +60,10 @@ Personal Neovim configuration focused on React/TypeScript development with beaut
 
 | Keybind      | Description                                |
 | ------------ | ------------------------------------------ |
-| `<leader>pf` | Find files                                 |
-| `<C-p>`      | Git files                                  |
-| `<C-g>`      | Live grep                                  |
+| `<leader>ff` | Find files                                 |
+| `<leader>fg` | Live grep                                  |
+| `<leader>fb` | Buffers                                    |
 | `<leader>fh` | Help tags                                  |
-| `<leader>/`  | Fuzzy find in current buffer               |
-| `<leader>?`  | Show recent files                          |
-| `<leader>sd` | Show diagnostics                           |
-| `<leader>fb` | File browser modal                         |
-| `<C-b>`      | File browser in current buffer's directory |
 
 **Telescope Actions (within picker):**
 | Keybind | Description                    |
@@ -72,15 +71,13 @@ Personal Neovim configuration focused on React/TypeScript development with beaut
 | `<C-q>` | Send all results to quickfix list |
 | `<C-j>` | Move to next item              |
 | `<C-k>` | Move to previous item          |
-| `<C-l>` | Select item                    |
 
 ### 📌 Harpoon
 
-| Keybind       | Description              |
-| ------------- | ------------------------ |
-| `<leader>a`   | Add file to harpoon      |
-| `<C-e>`       | Toggle quick menu        |
-| `<leader>1-4` | Jump to harpoon file 1-4 |
+| Keybind     | Description         |
+| ----------- | ------------------- |
+| `<leader>a` | Add file to harpoon |
+| `<C-e>`     | Toggle quick menu   |
 
 ### 🔧 LSP (Language Server Protocol)
 
@@ -106,7 +103,7 @@ Personal Neovim configuration focused on React/TypeScript development with beaut
 | ------------- | ---------------------- |
 | `<leader>vca` | Code action            |
 | `<leader>vrn` | Rename symbol          |
-| `<leader>f`   | Format code            |
+| `<leader>fm`  | Format code            |
 
 **Autocompletion:**
 | Keybind    | Description              |
@@ -117,47 +114,43 @@ Personal Neovim configuration focused on React/TypeScript development with beaut
 | `<C-e>`    | Abort completion         |
 | `<CR>`     | Confirm selection        |
 
-### 🤖 AI Integration
+### 🤖 AI Integration (Sidekick.nvim)
 
-#### GitHub Copilot (Inline Suggestions)
+#### Next Edit Suggestions (NES)
 | Keybind    | Description                          |
 | ---------- | ------------------------------------ |
-| `Tab`      | Accept Copilot suggestion            |
+| `<Tab>`    | Goto/Apply Next Edit Suggestion      |
+
+#### CLI Terminal Control
+| Keybind      | Description                        |
+| ------------ | ---------------------------------- |
+| `<leader>aa` | Toggle AI CLI terminal (tmux pane) |
+| `<Ctrl-.>`   | Toggle Sidekick (all modes)        |
+| `<leader>as` | Select AI tool (Claude, Copilot, etc.) |
+| `<leader>ad` | Detach/Close CLI session           |
+
+#### Context & Prompts
+| Keybind      | Description                        |
+| ------------ | ---------------------------------- |
+| `<leader>at` | Send current context               |
+| `<leader>ap` | Open prompt selector               |
+| `<leader>af` | Send entire file                   |
+| `<leader>av` | Send visual selection (visual mode)|
+
+#### GitHub Copilot (Inline)
+| Keybind    | Description                          |
+| ---------- | ------------------------------------ |
 | `Alt+]`    | Next Copilot suggestion              |
 | `Alt+[`    | Previous Copilot suggestion          |
 | `Ctrl+]`   | Dismiss Copilot suggestion           |
-
-#### Claude Code Integration
-
-**Core Commands:**
-| Keybind      | Description                        |
-| ------------ | ---------------------------------- |
-| `<leader>ac` | Toggle Claude Code terminal        |
-| `<leader>af` | Focus Claude Code terminal         |
-| `<leader>as` | Send selection to Claude (visual)  |
-| `<leader>ab` | Add current buffer to context      |
-
-**Context Management:**
-| Keybind      | Description                        |
-| ------------ | ---------------------------------- |
-| `<leader>ca` | Add current file to context        |
-| `<leader>cd` | Add current directory to context   |
-| `<leader>cb` | Add file + send entire buffer      |
-| `<leader>cl` | Add file + send current line       |
-
-**Diff Controls:**
-| Keybind      | Description                        |
-| ------------ | ---------------------------------- |
-| `<leader>aa` | Accept Claude's proposed changes   |
-| `<leader>ad` | Deny Claude's proposed changes     |
-| `<leader>am` | Select Claude model               |
 
 ### 💭 Comments
 
 | Keybind | Description                       |
 | ------- | --------------------------------- |
-| `<C-/>` | Toggle line comment (normal mode) |
-| `<C-/>` | Toggle line comment (visual mode) |
+| `gc`    | Toggle line comment (normal mode) |
+| `gc`    | Toggle line comment (visual mode) |
+| `gb`    | Toggle block comment              |
 
 ### 📝 Todo Comments
 
@@ -165,7 +158,6 @@ Personal Neovim configuration focused on React/TypeScript development with beaut
 | ------------ | --------------------- |
 | `]t`         | Next todo comment     |
 | `[t`         | Previous todo comment |
-| `<leader>ft` | Find todos            |
 
 ### 🌳 Git
 
@@ -173,8 +165,6 @@ Personal Neovim configuration focused on React/TypeScript development with beaut
 | Keybind       | Description |
 | ------------- | ----------- |
 | `<leader>gs`  | Git status  |
-| `<leader>gc`  | Git commit  |
-| `<leader>gp`  | Git push    |
 | `<leader>gac` | AI Commit with auto-generated message |
 
 **Git Navigation & Actions (Gitsigns):**
@@ -183,11 +173,8 @@ Personal Neovim configuration focused on React/TypeScript development with beaut
 | `]c`         | Next git change                |
 | `[c`         | Previous git change            |
 | `<leader>gb` | Toggle git blame               |
-| `<leader>gB` | Detailed git blame             |
 | `<leader>gh` | Preview hunk                   |
 | `<leader>gr` | Reset hunk                     |
-| `<leader>gR` | Reset buffer                   |
-| `<leader>gu` | Unstage hunk                   |
 | `<leader>gd` | Git diff                       |
 
 ### 🔄 Quickfix List
@@ -204,8 +191,6 @@ Personal Neovim configuration focused on React/TypeScript development with beaut
 | Keybind      | Description                |
 | ------------ | -------------------------- |
 | `<leader>e`  | Toggle Neo-tree            |
-| `\`          | Reveal current file in Neo-tree |
-| `<leader>ngs`| Open git status window     |
 
 ### 🔄 Undo
 
@@ -217,15 +202,16 @@ Personal Neovim configuration focused on React/TypeScript development with beaut
 
 ### 🚀 Modern Development Stack
 - 🎯 **LSP Integration**: TypeScript, React, CSS, HTML, JSON, ESLint, Go support
-- 🤖 **Dual AI Integration**: GitHub Copilot (inline) + Claude Code (chat-based)
+- 🤖 **Dual AI Integration**: GitHub Copilot (inline) + Sidekick (CLI tools)
 - ⚡ **Smart Autocompletion**: Context-aware suggestions with snippets
-- 🔧 **Auto-formatting**: ESLint auto-fix on save + Prettier integration
+- 🔧 **Auto-formatting**: Conform.nvim with ESLint & Prettier
 
 ### 🎨 Beautiful UI
 - 🌈 **Transparent Background**: Terminal-friendly transparency
-- 🎯 **Alpha Dashboard**: Beautiful startup screen
+- 🎯 **Alpha Dashboard**: Beautiful startup screen with plugin count
 - 📊 **Lualine Status**: Informative status line
 - 🌳 **Neo-tree Explorer**: Modern file navigation
+- 💬 **Noice.nvim**: Enhanced command line and notifications
 
 ### ⚡ Efficient Workflows
 - 🔍 **Telescope Integration**: Fuzzy finding everything
@@ -235,26 +221,28 @@ Personal Neovim configuration focused on React/TypeScript development with beaut
 - 📝 **Todo Highlighting**: TODO/FIXME/NOTE comments
 - 🔄 **Visual Undo Tree**: History visualization
 
-### 🤖 AI-Powered Development
+### 🤖 AI-Powered Development (Triple AI Setup)
 - ⚡ **Inline Suggestions**: GitHub Copilot for instant code completions
-- 🎯 **Selection Tracking**: Claude sees your selections in real-time
-- 🚀 **Auto-start**: Claude launches automatically when needed
-- 📂 **Context Management**: Smart file and directory context
-- 🔄 **Seamless Navigation**: Switch between editor and AI chat
-- ✨ **Diff Integration**: Accept/deny AI suggestions
+- 💬 **Copilot CLI**: Natural language conversations in terminal
+- 🎯 **Sidekick.nvim**: Multiple AI tool integration (Claude, Copilot CLI, etc.)
+- 🖥️ **Tmux Integration**: AI CLI runs in separate tmux pane
+- 📂 **Context Management**: Send files, selections, or current context to AI
+- 🔄 **Next Edit Suggestions**: AI-powered code modifications with Tab navigation
+- ✨ **Prompt Library**: Pre-configured prompts for common tasks
 
 ## 📦 Dependencies
 
 ### Required
-- **Neovim** >= 0.9.0
+- **Neovim** >= 0.11.2 (for sidekick.nvim)
 - **Git**
 - **Node.js** (for LSP servers)
 - **ripgrep** (for Telescope search)
+- **tmux** (for sidekick CLI integration)
 - **A Nerd Font** (for icons)
 
 ### Language Servers (Auto-installed via Mason)
 - `ts_ls` - TypeScript/JavaScript
-- `lua_ls` - Lua  
+- `lua_ls` - Lua
 - `cssls` - CSS
 - `html` - HTML
 - `jsonls` - JSON
@@ -263,8 +251,9 @@ Personal Neovim configuration focused on React/TypeScript development with beaut
 
 ### AI Integration
 - **GitHub Copilot** - Sign in via `:Copilot auth`
-- **Claude Code CLI** - Installed at `~/.claude/local/claude`
-- **Snacks.nvim** - Terminal provider for floating windows
+- **Copilot LSP** - For sidekick.nvim (`:LspCopilotSignIn`)
+- **GitHub Copilot CLI** - Install via `npm install -g @github/copilot`
+- **Snacks.nvim** - UI components and terminal provider
 
 ## 🛠️ Installation & Setup
 
@@ -273,14 +262,14 @@ Personal Neovim configuration focused on React/TypeScript development with beaut
 **Required Software:**
 ```bash
 # macOS (via Homebrew)
-brew install neovim git node ripgrep
+brew install neovim git node ripgrep tmux
 
 # Ubuntu/Debian
 sudo apt update
-sudo apt install neovim git nodejs npm ripgrep
+sudo apt install neovim git nodejs npm ripgrep tmux
 
 # Arch Linux
-sudo pacman -S neovim git nodejs npm ripgrep
+sudo pacman -S neovim git nodejs npm ripgrep tmux
 ```
 
 **Nerd Font Installation:**
@@ -294,18 +283,6 @@ brew install --cask font-hack-nerd-font
 # https://www.nerdfonts.com/font-downloads
 ```
 
-### Claude Code CLI Setup
-
-**Install Claude Code CLI:**
-```bash
-# Follow official installation guide at:
-# https://claude.ai/code
-
-# After installation, verify it's available:
-which claude
-# Should output: /Users/yourusername/.claude/local/claude
-```
-
 ### Configuration Installation
 
 **1. Backup existing config (if any):**
@@ -316,14 +293,13 @@ mv ~/.local/share/nvim ~/.local/share/nvim.backup
 
 **2. Clone this configuration:**
 ```bash
-git clone https://github.com/yourusername/nvim-config ~/.config/nvim
+git clone https://github.com/JanSmrcka/nvim-config ~/.config/nvim
 # OR manually copy all files to ~/.config/nvim/
 ```
 
-**3. Install packer.nvim (plugin manager):**
-```bash
-git clone --depth 1 https://github.com/wbthomason/packer.nvim \
-  ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+**3. No manual plugin manager installation needed!**
+```
+Lazy.nvim bootstraps itself automatically on first launch
 ```
 
 ## 🚀 First Launch
@@ -332,15 +308,15 @@ git clone --depth 1 https://github.com/wbthomason/packer.nvim \
 ```bash
 nvim
 ```
+*Lazy.nvim will automatically install all plugins on first launch*
 
-**2. Install plugins:**
-```vim
-:PackerSync
-```
+**2. Wait for installation to complete**
+- You'll see a progress window
+- Treesitter parsers will compile
+- Press `q` when done
 
 **3. Restart Neovim**
 ```bash
-# Exit and restart nvim
 :q
 nvim
 ```
@@ -351,13 +327,48 @@ nvim
 ```
 *In Mason UI, install: `typescript-language-server`, `lua-language-server`, `css-lsp`, `html-lsp`, `json-lsp`, `eslint-lsp`, `gopls`*
 
-**5. Setup AI integrations:**
+**5. Install GitHub Copilot CLI:**
+```bash
+# Requires Node.js v22+ and npm v10+
+npm install -g @github/copilot
+
+# Verify installation
+copilot --version
+```
+
+**6. Setup AI integrations:**
 ```vim
-# Authenticate GitHub Copilot:
+# Authenticate GitHub Copilot (inline suggestions):
 :Copilot auth
 
-# Verify Claude Code integration - open a file and try:
-<leader>ac
+# Sign in to Copilot LSP (for sidekick):
+:LspCopilotSignIn
+
+# Verify sidekick setup:
+:checkhealth sidekick
+```
+
+**7. Configure Copilot CLI (first time):**
+```bash
+# Start Copilot CLI
+copilot
+
+# Inside CLI, login:
+/login
+
+# Follow on-screen instructions to authenticate
+```
+
+**8. Test Sidekick integration:**
+```vim
+# In Neovim, try opening AI CLI:
+<leader>aa
+
+# Select GitHub Copilot CLI as your tool:
+<leader>as
+
+# Send current context:
+<leader>at
 ```
 
 ## 🔧 Configuration Structure
@@ -365,29 +376,42 @@ nvim
 ```
 ~/.config/nvim/
 ├── init.lua                 # Main entry point
-├── lua/jendis/
-│   ├── init.lua            # Module loader
-│   ├── packer.lua          # Plugin definitions
-│   ├── set.lua             # Neovim settings
-│   └── remap.lua           # Key mappings
-├── after/plugin/
-│   ├── alpha.lua           # Dashboard configuration
-│   ├── claudecode.lua      # AI integration
+├── lua/
+│   ├── config/
+│   │   ├── init.lua        # Config loader
+│   │   ├── options.lua     # Neovim settings
+│   │   ├── keymaps.lua     # Key mappings
+│   │   └── autocmds.lua    # Autocommands (Alpha startup)
+│   └── plugins/
+│       ├── init.lua        # Lazy.nvim bootstrap
+│       ├── colorschemes.lua # Theme plugins
+│       ├── telescope.lua   # Fuzzy finder
+│       ├── neo-tree.lua    # File explorer
+│       ├── treesitter.lua  # Syntax highlighting
+│       ├── lsp.lua         # Language servers
+│       ├── ui.lua          # Lualine, Alpha, Noice
+│       ├── git.lua         # Fugitive, Gitsigns
+│       ├── editor.lua      # Harpoon, Undotree, etc.
+│       ├── formatting.lua  # Conform.nvim
+│       ├── ai.lua          # Sidekick, Copilot, Snacks
+│       ├── comments.lua    # Comment plugins
+│       └── markdown.lua    # Markdown rendering
+├── after/plugin/           # Plugin configurations
+│   ├── alpha.lua           # Dashboard setup
 │   ├── colors.lua          # Theme settings
-│   ├── lsp.lua             # Language server setup
-│   ├── telescope.lua       # Fuzzy finder
-│   ├── treesitter.lua      # Syntax highlighting
-│   └── ...                 # Other plugin configs
-├── README.md               # This file
-└── CLAUDE.md              # Claude Code guidance
+│   ├── lsp.lua             # LSP configuration
+│   ├── telescope.lua       # Telescope setup
+│   ├── treesitter.lua      # Treesitter config
+│   └── ...                 # Other configs
+└── README.md               # This file
 ```
 
 ## ⚠️ Troubleshooting
 
 **Plugin installation fails:**
 ```vim
-:PackerClean
-:PackerSync
+:Lazy restore
+:Lazy sync
 ```
 
 **LSP not working:**
@@ -396,13 +420,20 @@ nvim
 :Mason
 ```
 
-**Claude Code not found:**
-```bash
-# Verify installation
-which claude
-ls -la ~/.claude/local/claude
+**Sidekick not working:**
+```vim
+:checkhealth sidekick
+:LspCopilotSignIn
+```
 
-# If not found, reinstall Claude Code CLI
+**Tmux pane not opening:**
+```bash
+# Verify you're running inside tmux:
+echo $TMUX
+
+# If not in tmux, start tmux first:
+tmux
+nvim
 ```
 
 **Fonts/icons not displaying:**
@@ -417,7 +448,8 @@ ls -la ~/.claude/local/claude
 
 **Update plugins:**
 ```vim
-:PackerSync
+:Lazy update
+:Lazy sync
 ```
 
 **Update LSP servers:**
@@ -430,22 +462,100 @@ ls -la ~/.claude/local/claude
 ```bash
 cd ~/.config/nvim
 git pull origin main
+nvim  # Lazy will auto-update plugins
+```
+
+**Clean unused plugins:**
+```vim
+:Lazy clean
 ```
 
 ## 💡 Development Workflow
 
 ### 🚀 AI-Enhanced Development Flow
 
-1. **Open project**: `<leader>pf` or `<C-p>` for git files
-2. **Inline AI coding**: Start typing - Copilot provides suggestions (accept with `Tab`)
-3. **Add to Claude context**: `<leader>ca` (current file) or `<leader>cd` (directory)  
-4. **Start AI chat**: `<leader>ac` to toggle Claude for complex questions
-5. **Navigate seamlessly**: `<C-h/j/k/l>` between editor and AI
-6. **Send code to AI**: Select code, press `<leader>as`
-7. **Apply suggestions**: `<leader>aa` to accept, `<leader>ad` to deny
+1. **Start in tmux**: `tmux` (if not already)
+2. **Open Neovim**: `nvim` in your project
+3. **Find files**: `<leader>ff` for fuzzy file search
+4. **Inline AI coding**: Start typing - Copilot provides suggestions (accept with `Tab`)
+5. **Complex AI tasks**: `<leader>aa` to open Sidekick CLI in tmux pane
+6. **Select AI tool**: `<leader>as` to choose Claude, Copilot, or other tools
+7. **Send context**:
+   - `<leader>at` - Send current code context
+   - `<leader>af` - Send entire file
+   - Select code in visual mode, then `<leader>av` - Send selection
+8. **Use prompts**: `<leader>ap` for pre-configured prompts
+9. **Navigate seamlessly**: `<C-h/j/k/l>` between editor and AI pane
 
-### 🎯 Best of Both AI Worlds
-- **Copilot**: Instant inline completions while typing
-- **Claude Code**: Deep discussions, refactoring, architecture questions
+### 🎯 Triple AI Power
+- **GitHub Copilot (inline)**: Instant completions while typing - accept with `Tab`
+- **GitHub Copilot CLI**: Natural language conversations in terminal via Sidekick
+- **Sidekick.nvim**: Multiple AI tool integration (Claude, Copilot CLI, etc.)
+- **Tmux integration**: AI runs in separate pane, doesn't block your editor
 
-Perfect for React/TypeScript development with dual AI assistance! 🚀
+### 🔥 Quick Tips
+
+**Lazy.nvim commands:**
+- `:Lazy` - Open plugin manager UI
+- `:Lazy update` - Update all plugins
+- `:Lazy sync` - Install missing + update + clean
+- `:Lazy profile` - See plugin load times
+
+**Alpha dashboard shortcuts:**
+- `n` - New file
+- `f` - Find file (Telescope)
+- `r` - Recent files
+- `p` - Update plugins (Lazy sync)
+- `q` - Quit
+
+**AI workflow:**
+1. Code with Copilot inline suggestions
+2. Need help? `<leader>aa` → opens Sidekick
+3. Choose tool: `<leader>as` (select "GitHub Copilot CLI")
+4. Send context: `<leader>at` or `<leader>af`
+5. Get AI response in tmux pane
+6. Close when done: `<leader>ad`
+
+**GitHub Copilot CLI commands:**
+- `/help` - Show available commands
+- `/login` - Authenticate with GitHub
+- `/exit` - Exit Copilot CLI
+- Ask anything directly in natural language!
+
+**Example workflow with Copilot CLI:**
+```
+# In Neovim:
+<leader>aa           # Open Sidekick
+<leader>as           # Select "GitHub Copilot CLI"
+<leader>at           # Send current function/class
+
+# In tmux pane (Copilot CLI):
+How can I optimize this code?
+What are potential bugs here?
+Explain this algorithm step by step
+```
+
+Perfect for React/TypeScript development with modern tooling and **triple AI assistance** (inline + CLI + chat)! 🚀
+
+---
+
+## 📝 Migration Notes (for existing users)
+
+**From Packer to Lazy.nvim:**
+- ✅ All plugins migrated
+- ✅ Lazy loading optimized
+- ✅ Faster startup time
+- ❌ Packer removed
+
+**Key changes:**
+- Commands: `:PackerSync` → `:Lazy sync`
+- Structure: `lua/jendis/` → `lua/config/` + `lua/plugins/`
+- AI: `claudecode.nvim` → `sidekick.nvim` (more flexible)
+- Plugin count shown in Alpha dashboard now uses lazy.nvim API
+
+**Clean installation recommended:**
+```bash
+# Backup first!
+mv ~/.local/share/nvim ~/.local/share/nvim.backup
+# Then launch nvim - everything reinstalls cleanly
+```
