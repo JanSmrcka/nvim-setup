@@ -1,0 +1,49 @@
+-- Telescope configuration with custom keymaps
+return {
+  {
+    "nvim-telescope/telescope.nvim",
+    dependencies = {
+      "nvim-telescope/telescope-file-browser.nvim",
+    },
+    keys = {
+      { "<leader>pf", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
+      { "<C-p>", function()
+        local ok = pcall(require("telescope.builtin").git_files, { show_untracked = true })
+        if not ok then
+          require("telescope.builtin").find_files()
+        end
+      end, desc = "Git Files (fallback to find)" },
+      { "<C-g>", "<cmd>Telescope live_grep<cr>", desc = "Live Grep" },
+      { "<leader>ph", "<cmd>Telescope help_tags<cr>", desc = "Help Tags" },
+      {
+        "<leader>ps",
+        function()
+          require("telescope.builtin").grep_string({ search = vim.fn.input("Grep > ") })
+        end,
+        desc = "Grep String",
+      },
+      { "<leader>/", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Buffer Fuzzy Find" },
+      { "<leader>?", "<cmd>Telescope oldfiles<cr>", desc = "Old Files" },
+      { "<leader>sd", "<cmd>Telescope diagnostics<cr>", desc = "Diagnostics" },
+      { "<C-b>", "<cmd>Telescope file_browser path=%:p:h select_buffer=true<cr>", desc = "File Browser" },
+    },
+    opts = {
+      defaults = {
+        mappings = {
+          i = {
+            ["<C-j>"] = function(...)
+              return require("telescope.actions").move_selection_next(...)
+            end,
+            ["<C-k>"] = function(...)
+              return require("telescope.actions").move_selection_previous(...)
+            end,
+          },
+        },
+      },
+    },
+    config = function(_, opts)
+      require("telescope").setup(opts)
+      require("telescope").load_extension("file_browser")
+    end,
+  },
+}
