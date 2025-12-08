@@ -9,6 +9,7 @@ return {
           enabled = true,
         },
       },
+      nes = { enabled = false },
     },
     keys = {
       {
@@ -37,13 +38,6 @@ return {
         desc = "Sidekick Toggle CLI",
       },
       {
-        "<leader>as",
-        function()
-          require("sidekick.cli").select()
-        end,
-        desc = "Select CLI",
-      },
-      {
         "<leader>ad",
         function()
           require("sidekick.cli").close()
@@ -66,7 +60,7 @@ return {
         desc = "Prompt Selector",
       },
       {
-        "<leader>ca",
+        "<leader>as",
         function()
           require("sidekick.cli").send({ msg = "{file}" })
         end,

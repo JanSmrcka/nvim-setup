@@ -33,6 +33,9 @@ return {
     vim.keymap.set("n", "<leader>5", function()
       harpoon:list():select(5)
     end, { desc = "Harpoon file 5" })
+    vim.keymap.set("n", "<leader>6", function()
+      harpoon:list():select(6)
+    end, { desc = "Harpoon file 6" })
 
     -- Navigate prev/next in list
     vim.keymap.set("n", "<C-S-P>", function()

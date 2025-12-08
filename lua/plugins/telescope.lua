@@ -1,4 +1,13 @@
 -- Telescope configuration with custom keymaps
+
+local transform_mod = require("telescope.actions.mt").transform_mod
+
+local actions = transform_mod({
+  send_to_qflist = function(prompt_bufnr)
+    require("telescope.actions").send_to_qflist(prompt_bufnr)
+    require("telescope.actions").open_qflist(prompt_bufnr)
+  end,
+})
 return {
   {
     "nvim-telescope/telescope.nvim",
@@ -7,12 +16,16 @@ return {
     },
     keys = {
       { "<leader>pf", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
-      { "<C-p>", function()
-        local ok = pcall(require("telescope.builtin").git_files, { show_untracked = true })
-        if not ok then
-          require("telescope.builtin").find_files()
-        end
-      end, desc = "Git Files (fallback to find)" },
+      {
+        "<C-p>",
+        function()
+          local ok = pcall(require("telescope.builtin").git_files, { show_untracked = true })
+          if not ok then
+            require("telescope.builtin").find_files()
+          end
+        end,
+        desc = "Git Files (fallback to find)",
+      },
       { "<C-g>", "<cmd>Telescope live_grep<cr>", desc = "Live Grep" },
       { "<leader>ph", "<cmd>Telescope help_tags<cr>", desc = "Help Tags" },
       {
@@ -31,12 +44,16 @@ return {
       defaults = {
         mappings = {
           i = {
-            ["<C-j>"] = function(...)
-              return require("telescope.actions").move_selection_next(...)
-            end,
-            ["<C-k>"] = function(...)
-              return require("telescope.actions").move_selection_previous(...)
-            end,
+            ["<C-j>"] = require("telescope.actions").move_selection_next, -- Move to the next item
+            ["<C-k>"] = require("telescope.actions").move_selection_previous, -- Move to the previous item
+            ["<C-l>"] = require("telescope.actions").select_default,
+            ["<C-q>"] = actions.send_to_qflist,
+          },
+          n = {
+            ["<C-j>"] = require("telescope.actions").move_selection_next,
+            ["<C-k>"] = require("telescope.actions").move_selection_previous,
+            ["<C-l>"] = require("telescope.actions").select_default,
+            ["<C-q>"] = actions.send_to_qflist,
           },
         },
       },
