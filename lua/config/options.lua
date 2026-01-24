@@ -7,10 +7,10 @@ vim.g.lazyvim_picker = "telescope"
 
 -- Cursor
 vim.opt.guicursor = {
-  "n-v-c:block",
-  "i-ci-ve:ver25",
-  "r-cr:hor20",
-  "o:hor50",
+    "n-v-c:block",
+    "i-ci-ve:ver25",
+    "r-cr:hor20",
+    "o:hor50",
 }
 
 -- Indentation (2 spaces)
@@ -37,18 +37,18 @@ vim.o.autoread = true
 
 -- Diagnostics configuration
 vim.diagnostic.config({
-  severity_sort = true,
-  signs = {
-    text = {
-      [vim.diagnostic.severity.ERROR] = " ",
-      [vim.diagnostic.severity.WARN] = " ",
-      [vim.diagnostic.severity.INFO] = " ",
-      [vim.diagnostic.severity.HINT] = "󰌵",
+    severity_sort = true,
+    signs = {
+        text = {
+            [vim.diagnostic.severity.ERROR] = " ",
+            [vim.diagnostic.severity.WARN] = " ",
+            [vim.diagnostic.severity.INFO] = " ",
+            [vim.diagnostic.severity.HINT] = "󰌵",
+        },
     },
-  },
-  float = {
-    focusable = false,
-    border = "rounded",
-    source = "always",
-  },
+    float = {
+        focusable = true,
+        border = "rounded",
+        source = "always",
+    },
 })
