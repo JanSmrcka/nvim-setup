@@ -1,37 +1,63 @@
 -- Colorscheme configuration
+-- Change this to switch colorscheme: "rose-pine", "solarized-osaka", "onedark"
+local selected = "onedark"
 
 return {
-    -- Install onedark
+    -- Rose Pine
+    {
+        "rose-pine/neovim",
+        name = "rose-pine",
+        lazy = selected ~= "rose-pine",
+        priority = 1000,
+        opts = {
+            variant = "main", -- "main", "moon", "dawn"
+            dark_variant = "main",
+            dim_inactive_windows = false,
+            extend_background_behind_borders = false,
+            styles = {
+                bold = true,
+                italic = true,
+                transparency = true,
+            },
+        },
+    },
+    -- Solarized Osaka
+    {
+        "craftzdog/solarized-osaka.nvim",
+        lazy = selected ~= "solarized-osaka",
+        priority = 1000,
+        opts = {
+            transparent = true,
+            terminal_colors = true,
+            styles = {
+                comments = { italic = true },
+                keywords = { italic = true },
+                functions = {},
+                variables = {},
+                sidebars = "transparent",
+                floats = "transparent",
+            },
+            sidebars = { "qf", "help" },
+            dim_inactive = false,
+            lualine_bold = false,
+        },
+    },
+    -- OneDark
     {
         "navarasu/onedark.nvim",
-        lazy = false,
+        lazy = selected ~= "onedark",
         priority = 1000,
         opts = {
             style = "darker",
             transparent = true,
-            lualine = {
-                transparent = true,
-            },
-            diagnostics = {
-                darker = true,
-                undercurl = true,
-                background = false,
-            },
+            term_colors = true,
         },
-        config = function(_, opts)
-            require("onedark").setup(opts)
-            require("onedark").load()
-
-            -- Yank highlight
-            vim.cmd([[hi YankHighlight guibg=#ffeb3b guifg=#000000]])
-        end,
     },
-    -- Set as default colorscheme for LazyVim
+    -- LazyVim colorscheme setting
     {
         "LazyVim/LazyVim",
         opts = {
-            colorscheme = "onedark",
-            style = "darker",
+            colorscheme = selected,
         },
     },
 }

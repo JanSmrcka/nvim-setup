@@ -29,6 +29,9 @@ vim.opt.foldmethod = "indent"
 vim.opt.foldlevel = 99
 vim.opt.foldenable = true
 
+-- Disable visible whitespace characters (tabs showing as >)
+vim.opt.list = false
+
 -- Undo directory
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 
