@@ -4,10 +4,18 @@ return {
     "saghen/blink.cmp",
     opts = {
         completion = {
+            accept = {
+                auto_brackets = {
+                    enabled = false,
+                },
+            },
             trigger = {
                 show_on_keyword = true,
                 show_on_trigger_character = true,
                 show_on_insert_on_trigger_character = false,
+            },
+            ghost_text = {
+                enabled = false,
             },
         },
         keymap = {

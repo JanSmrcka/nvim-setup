@@ -1,6 +1,6 @@
 -- Colorscheme configuration
 -- Change this to switch colorscheme: "rose-pine", "solarized-osaka", "onedark"
-local selected = "onedark"
+local selected = "solarized-osaka"
 
 return {
     -- Rose Pine
@@ -40,6 +40,16 @@ return {
             sidebars = { "qf", "help" },
             dim_inactive = false,
             lualine_bold = false,
+            on_highlights = function(hl, c)
+                -- Subtle bracket matching - muted background + colored underline
+                hl.MatchParen = {
+                    bg = c.bg_highlight,
+                    fg = c.cyan,
+                    underline = true,
+                    sp = c.cyan, -- underline color
+                    bold = true,
+                }
+            end,
         },
     },
     -- OneDark
