@@ -10,6 +10,17 @@ return {
                         less = { lint = { unknownAtRules = "ignore" } },
                     },
                 },
+                gopls = {
+                    settings = {
+                        gopls = {
+                            semanticTokens = true,
+                            analyses = {
+                                unusedparams = true,
+                            },
+                            staticcheck = true,
+                        },
+                    },
+                },
             },
         },
     },
