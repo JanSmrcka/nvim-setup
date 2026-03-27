@@ -5,6 +5,8 @@
 -- Use telescope as picker instead of fzf-lua
 vim.g.lazyvim_picker = "telescope"
 
+vim.opt.belloff = "all"
+
 -- Cursor
 vim.opt.guicursor = {
     "n-v-c:block",

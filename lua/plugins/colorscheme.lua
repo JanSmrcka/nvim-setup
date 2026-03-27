@@ -1,8 +1,25 @@
 -- Colorscheme configuration
--- Change this to switch colorscheme: "rose-pine", "solarized-osaka", "onedark"
-local selected = "solarized-osaka"
+-- Change this to switch colorscheme: "rose-pine", "solarized-osaka", "onedark", "tokyonight"
+local selected = "tokyonight"
 
 return {
+    -- TokyoNight
+    {
+        "folke/tokyonight.nvim",
+        lazy = selected ~= "tokyonight",
+        priority = 1000,
+        opts = {
+            style = "storm",
+            transparent = true,
+            terminal_colors = true,
+            styles = {
+                comments = { italic = true },
+                keywords = { italic = true },
+                sidebars = "transparent",
+                floats = "transparent",
+            },
+        },
+    },
     -- Rose Pine
     {
         "rose-pine/neovim",
@@ -61,6 +78,38 @@ return {
             style = "darker",
             transparent = true,
             term_colors = true,
+        },
+    },
+    -- Lualine - minimal tokyonight style
+    {
+        "nvim-lualine/lualine.nvim",
+        opts = {
+            options = {
+                theme = {
+                    normal = {
+                        a = { fg = "#24283b", bg = "#7aa2f7", gui = "bold" },
+                        b = { fg = "#c0caf5", bg = "NONE" },
+                        c = { fg = "#565f89", bg = "NONE" },
+                    },
+                    insert = {
+                        a = { fg = "#24283b", bg = "#9ece6a", gui = "bold" },
+                    },
+                    visual = {
+                        a = { fg = "#24283b", bg = "#bb9af7", gui = "bold" },
+                    },
+                    replace = {
+                        a = { fg = "#24283b", bg = "#f7768e", gui = "bold" },
+                    },
+                    command = {
+                        a = { fg = "#24283b", bg = "#e0af68", gui = "bold" },
+                    },
+                    inactive = {
+                        a = { fg = "#565f89", bg = "NONE" },
+                        b = { fg = "#565f89", bg = "NONE" },
+                        c = { fg = "#565f89", bg = "NONE" },
+                    },
+                },
+            },
         },
     },
     -- LazyVim colorscheme setting
