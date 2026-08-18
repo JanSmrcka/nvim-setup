@@ -2,104 +2,77 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Repository Overview
+## Overview
 
-This is a personal Neovim configuration focused on modern development with a beautiful UI and efficient workflows. The configuration is written in Lua and uses Packer.nvim for plugin management.
+This is a LazyVim-based Neovim configuration. LazyVim is a Neovim setup framework that uses lazy.nvim for plugin management.
 
 ## Architecture
 
-### Core Structure
-- **init.lua**: Main entry point that loads all configuration modules and handles startup behavior (Alpha dashboard)
-- **lua/jendis/**: Core configuration modules
-  - `packer.lua`: Plugin definitions and management using packer.nvim
-  - `set.lua`: Neovim options and settings (tabs, indentation, UI preferences)
-  - `remap.lua`: Custom key mappings and leader key bindings
-  - `init.lua`: Module loader
-- **after/plugin/**: Plugin-specific configurations that load after plugins are initialized
-
-### Plugin Architecture
-The configuration follows a modular approach where each plugin has its own configuration file in `after/plugin/`:
-- LSP setup with Mason, nvim-lspconfig, and lsp-zero
-- Telescope for fuzzy finding and file navigation
-- Neo-tree for file exploration
-- Treesitter for syntax highlighting
-- Harpoon for quick file navigation
-- Git integration with Fugitive and Gitsigns
-- UI enhancements with Lualine and Alpha dashboard
-
-### Key Design Patterns
-- **Transparent background**: All UI elements configured for terminal transparency
-- **Space as leader key**: All custom mappings use space as the leader
-- **Modular plugin loading**: Each plugin isolated in its own configuration file
-- **Git-centric workflow**: Heavy integration with Git tools and shortcuts
-
-## Common Development Commands
-
-### Plugin Management
-```bash
-# Update plugins (run from within Neovim)
-:PackerSync
-:PackerUpdate
-:PackerInstall
-
-# Compile plugin configurations
-:PackerCompile
+```
+init.lua                    # Entry point - loads config.lazy
+lua/
+  config/
+    lazy.lua                # lazy.nvim bootstrap and plugin loading
+    options.lua             # Neovim options (indentation, scrolloff, folding, etc.)
+    keymaps.lua             # Custom keymaps (loaded on VeryLazy event)
+    autocmds.lua            # Custom autocommands (loaded on VeryLazy event)
+  plugins/                  # Plugin specifications (auto-imported by LazyVim)
+    *.lua                   # Each file returns a plugin spec table
 ```
 
-### LSP and Development Tools
-```bash
-# Install/update language servers (run from within Neovim)
-:Mason
+## Plugin System
 
-# Update Treesitter parsers
-:TSUpdate
+Plugins are defined in `lua/plugins/*.lua`. Each file exports a table (or array of tables) following the lazy.nvim plugin spec format:
 
-# Format current buffer
-<leader>f  # or :lua vim.lsp.buf.format()
+```lua
+return {
+  "author/plugin-name",
+  opts = { ... },           -- merged with defaults
+  config = function() ... end,
+  keys = { ... },
+}
 ```
 
-### Configuration Management
-```bash
-# Reload configuration (from within Neovim)
-<leader><leader>  # Sources the current file
+LazyVim extras are imported in `lua/config/lazy.lua`:
+- `lazyvim.plugins.extras.linting.eslint`
+- `lazyvim.plugins.extras.formatting.prettier`
 
-# Navigate to plugin configuration
-# Edit after/plugin/<plugin-name>.lua for plugin-specific settings
-# Edit lua/jendis/packer.lua for plugin definitions
-```
+## Key Plugins
 
-## Key Configuration Details
+- **Colorscheme**: onedark (darker style, transparent background)
+- **Picker**: Telescope (set via `vim.g.lazyvim_picker = "telescope"`)
+- **Completion**: blink.cmp with LSP and path sources
+- **File navigation**: Harpoon 2 for quick file switching
+- **AI**: Copilot, Sidekick.nvim with claudecode.nvim integration
+- **Explorer**: snacks.nvim picker with hidden files enabled
 
-### Color Scheme Management
-- Default theme: Tokyo Night
-- Supports multiple themes: Rose Pine, Tokyo Night, Mellow, Solarized Osaka, OneDark Pro, VSCode
-- Transparent background enabled by default in `after/plugin/colors.lua`
-- Change theme by editing the `ColorMyPencil()` function parameter
+## Custom Keymaps
 
-### Plugin Dependencies
-- Uses Packer.nvim for plugin management
-- All plugins defined in `lua/jendis/packer.lua` with Czech comments
-- Mason handles LSP server installations
-- Telescope requires ripgrep for file searching
-- Neo-tree replaces netrw (netrw is disabled in init.lua)
+Key bindings follow a mix of LazyVim defaults and custom mappings:
 
-### Critical Settings
-- **Leader key**: Space (set in both init.lua and remap.lua)
-- **Indentation**: 2 spaces, expandtab enabled
-- **Undo**: Persistent undo files stored in `~/.vim/undodir`
-- **Line numbers**: Relative numbering enabled
-- **Auto-reload**: Files automatically reload on focus/buffer changes
+- `<leader>1-6` - Harpoon file slots
+- `<C-e>` - Harpoon menu
+- `<C-p>` - Git files (falls back to find_files)
+- `<C-g>` - Live grep
+- `<C-b>` - File browser
+- `<leader>ai` / `<leader>si` - Toggle Sidekick CLI
+- `<leader>gac` - AI commit
+- `<leader>sr` - Search and replace word under cursor
+- `<C-j>/<C-k>` - Navigation in Telescope and completion menus
 
-### File Structure Conventions
-- Plugin configurations use descriptive Czech comments
-- Each plugin has isolated configuration in `after/plugin/`
-- Key mappings centralized in `lua/jendis/remap.lua`
-- Global settings in `lua/jendis/set.lua`
+## Commands
 
-## Important Notes
+- `:Lazy` - Open lazy.nvim UI (sync, update, clean plugins)
+- `:Mason` - Manage LSP servers, linters, formatters
+- `:Copilot` - GitHub Copilot commands
+- `:AICommit` - Generate AI-powered commit message
 
-- Netrw is explicitly disabled - use Neo-tree for file management
-- Configuration includes GitHub Copilot integration
-- Alpha dashboard shows on startup and when entering directories
-- Transparent terminal background is enforced across all UI elements
-- Git integration is extensive with Fugitive and Gitsigns
+## Configuration Patterns
+
+When adding new plugins:
+1. Create a new file in `lua/plugins/` or add to existing file
+2. Return plugin spec table with lazy.nvim format
+3. Use `opts` for configuration that merges with defaults
+4. Use `config` function for complex setup requiring the plugin API
+
+When overriding LazyVim defaults, the plugin spec merges with existing configuration - only specify what needs to change.
